@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             // 툴바 지정
             setSupportActionBar(toolbar)
-
             toolbar.title = "안녕하세요"
+
+            // 바텀네비게이션 음영 삭제
+            bottomNavigationView.background = null
         }
     }
 }
