@@ -11,6 +11,7 @@
         android:enabled="true"/>
 
     <item android:id="@+id/blank"
+        android:title=""
         android:enabled="false"/>
 
     <item android:id="@+id/chatFragment"
@@ -18,7 +19,7 @@
         android:title="대화"
         android:enabled="true"/>
 
-    <item android:id="@+id/userFragment"
+    <item android:id="@+id/moreFragment"
         android:icon="@drawable/ic_baseline_more_horiz_24"
         android:title="더 보기"
         android:enabled="true"/>
