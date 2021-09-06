@@ -84,8 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:gravity="right"
-            android:text="회원가입 / 비밀번호찾기"
-            android:textColor="@color/black"
+            android:text="회원가입 | 비밀번호찾기"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -99,7 +98,7 @@
             android:background="@drawable/signin_facebook"
             android:text="FACEBOOK LOGIN"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -112,7 +111,7 @@
             android:background="@drawable/signin_google"
             android:text="GOOGLE LOGIN"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 
