@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.hanyeop.happysharing.ListFragment"
+        android:name="com.hanyeop.happysharing.fragment.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.hanyeop.happysharing.ChatFragment"
+        android:name="com.hanyeop.happysharing.fragment.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.hanyeop.happysharing.MoreFragment"
+        android:name="com.hanyeop.happysharing.fragment.MoreFragment"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="com.hanyeop.happysharing.RankingFragment"
+        android:name="com.hanyeop.happysharing.fragment.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
 </navigation>
