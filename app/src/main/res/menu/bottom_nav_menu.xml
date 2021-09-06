@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/listFragment"
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="목록"
+        android:enabled="true"/>
+
+    <item android:id="@+id/rankingFragment"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="순위"
+        android:enabled="true"/>
+
+    <item android:id="@+id/addFragment"
+        android:icon="@drawable/ic_baseline_add_circle_24"
+        android:title="등록"
+        android:enabled="true"/>
+
+    <item android:id="@+id/chatFragment"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="대화"
+        android:enabled="true"/>
+
+    <item android:id="@+id/userFragment"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="내 나눔"
+        android:enabled="true"/>
+</menu>
