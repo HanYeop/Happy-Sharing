@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.hanyeop.happysharing.databinding.ActivityLoginBinding
+import com.hanyeop.happysharing.util.Constants.Companion.GOOGLE_LOGIN_CODE
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
     // 파이어베이스 계정 선언
     private var auth : FirebaseAuth? = null
     private var googleSignInClient : GoogleSignInClient? = null
-    private var GOOGLE_LOGIN_CODE = 9001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
