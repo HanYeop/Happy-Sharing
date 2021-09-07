@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,7 +34,8 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
     private var firestore : FirebaseFirestore? = null
     private var uid : String? = null
 
-    var name : String = ""
+    // 유저 이름
+    private val name = MutableLiveData<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +46,12 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         // firebase 초기화
         auth = FirebaseAuth.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
+
         // firestore 초기화
         firestore = FirebaseFirestore.getInstance()
+
+        // 프로필 불러오기
+        profileLoad()
 
         binding.apply {
             // 로그아웃 버튼
@@ -56,24 +63,12 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
             profileButton.setOnClickListener {
                 profileEdit()
             }
-
-//            profileLoad()
-            firestore?.collection("users")?.document(uid!!)
-                ?.addSnapshotListener { documentSnapshot, _ ->
-                    if (documentSnapshot == null) return@addSnapshotListener
-
-                    var userDTO = documentSnapshot.toObject(UserDTO::class.java)
-
-                    // 데이터 받아오기
-                    if (userDTO?.userId != null) {
-                        Log.d(TAG, "profileLoad: ${userDTO?.userId}")
-                        name = userDTO?.userId!!
-                        userIdText.text = name
-                    }
-                }
-            Log.d(TAG, "onViewCreated: $name")
-//            userIdText.text = name
         }
+
+        // 유저 이름 동기화
+        name.observe(viewLifecycleOwner,{
+            binding.userIdText.text = it
+        })
     }
 
     // 로그아웃
@@ -92,20 +87,20 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         startActivity(intent)
     }
 
-//    private fun profileLoad() {
-//        firestore?.collection("users")?.document(uid!!)
-//            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-//                if (documentSnapshot == null) return@addSnapshotListener
-//
-//                var userDTO = documentSnapshot.toObject(UserDTO::class.java)
-//
-//                // 데이터 받아오기
-//                if (userDTO?.userId != null) {
-//                    Log.d(TAG, "profileLoad: ${userDTO?.userId}")
-//                    name = userDTO?.userId!!
-//                }
-//            }
-//    }
+    // 프로필 불러오기
+    private fun profileLoad() {
+        firestore?.collection("users")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, _ ->
+                if (documentSnapshot == null) return@addSnapshotListener
+
+                var userDTO = documentSnapshot.toObject(UserDTO::class.java)
+                if (userDTO?.userId != null) {
+                    Log.d(TAG, "profileLoad: ${userDTO.userId}")
+                    // 이름 변경
+                    name.value = userDTO.userId.toString()
+                }
+            }
+    }
 
     // 프래그먼트는 뷰보다 오래 지속 . 프래그먼트의 onDestroyView() 메서드에서 결합 클래스 인스턴스 참조를 정리
     override fun onDestroyView() {
