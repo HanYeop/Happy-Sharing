@@ -1,5 +1,6 @@
 package com.hanyeop.happysharing.fragment
 
+import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -28,20 +29,26 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
         // 뷰바인딩
         _binding = FragmentMoreBinding.bind(view)
+
+        // 계정 동기화
         auth = Firebase.auth
 
         binding.apply {
-            // 로그아웃
-            button.setOnClickListener {
-                // 로그인 화면으로
-                val intent = Intent(context, LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                ActivityCompat.finishAffinity(requireActivity())
-                startActivity(intent)
-                auth?.signOut()
-                Toast.makeText(requireContext(), "로그아웃됨", Toast.LENGTH_SHORT).show()
+            // 로그아웃 버튼
+            singOutButton.setOnClickListener {
+                signOut()
             }
         }
+    }
+
+    // 로그아웃
+    private fun signOut(){
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        ActivityCompat.finishAffinity(requireActivity())
+        startActivity(intent)
+        auth?.signOut()
+        Toast.makeText(requireContext(), "로그아웃됨", Toast.LENGTH_SHORT).show()
     }
 
     // 프래그먼트는 뷰보다 오래 지속 . 프래그먼트의 onDestroyView() 메서드에서 결합 클래스 인스턴스 참조를 정리
