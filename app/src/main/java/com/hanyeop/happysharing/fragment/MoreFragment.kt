@@ -34,13 +34,10 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
     // Firebase
     private var auth : FirebaseAuth? = null
-    private var firestore : FirebaseFirestore? = null
     private var uid : String? = null
 
+    // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
-
-//    // 유저 이름
-//    private val name = MutableLiveData<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +48,6 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         // firebase 초기화
         auth = FirebaseAuth.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
-
-//        // firestore 초기화
-//        firestore = FirebaseFirestore.getInstance()
-
-        // 프로필 불러오기
-//        profileLoad()
 
         binding.apply {
             // 로그아웃 버튼
@@ -70,6 +61,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
             }
         }
 
+        // 프로필 불러오기
         firebaseViewModel.profileLoad(uid!!)
 
         // 유저 이름 동기화
@@ -93,21 +85,6 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         val intent = Intent(context, ProfileActivity::class.java)
         startActivity(intent)
     }
-
-    // 프로필 불러오기
-//    private fun profileLoad() {
-//        firestore?.collection("users")?.document(uid!!)
-//            ?.addSnapshotListener { documentSnapshot, _ ->
-//                if (documentSnapshot == null) return@addSnapshotListener
-//
-//                var userDTO = documentSnapshot.toObject(UserDTO::class.java)
-//                if (userDTO?.userId != null) {
-//                    Log.d(TAG, "profileLoad: ${userDTO.userId}")
-//                    // 이름 변경
-//                    name.value = userDTO.userId.toString()
-//                }
-//            }
-//    }
 
     // 프래그먼트는 뷰보다 오래 지속 . 프래그먼트의 onDestroyView() 메서드에서 결합 클래스 인스턴스 참조를 정리
     override fun onDestroyView() {
