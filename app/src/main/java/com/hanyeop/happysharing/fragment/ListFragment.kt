@@ -14,8 +14,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var nameList : Array<String>
-    lateinit var descriptionList : Array<String>
+    lateinit var titleList : Array<String>
+    lateinit var userList : Array<String>
 
     // ListAdapter 선언
     private lateinit var listAdapter: ListAdapter
@@ -26,12 +26,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         // 뷰바인딩
         _binding = FragmentListBinding.bind(view)
 
-        // 이름과 설명 초기화
-        nameList = resources.getStringArray(R.array.item_name)
-        descriptionList = resources.getStringArray(R.array.item_description)
+        // 제목과 아이디 초기화
+        titleList = resources.getStringArray(R.array.item_title)
+        userList = resources.getStringArray(R.array.item_user)
 
         binding.apply {
-            listAdapter = ListAdapter(nameList,descriptionList)
+            listAdapter = ListAdapter(titleList,userList)
             recyclerView.adapter = listAdapter
         }
     }

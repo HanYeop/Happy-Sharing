@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HappySharing</string>
 
-    <string-array name="item_name">
+    <string-array name="item_title">
         <item>Item 1</item>
         <item>Item 2</item>
         <item>Item 3</item>
@@ -12,14 +12,14 @@
         <item>Item 8</item>
     </string-array>
 
-    <string-array name="item_description">
-        <item>Item 1 입니다.</item>
-        <item>Item 2 입니다.</item>
-        <item>Item 3 입니다.</item>
-        <item>Item 4 입니다.</item>
-        <item>Item 5 입니다.</item>
-        <item>Item 6 입니다.</item>
-        <item>Item 7 입니다.</item>
-        <item>Item 8 입니다.</item>
+    <string-array name="item_user">
+        <item>Han</item>
+        <item>Kim</item>
+        <item>Lee</item>
+        <item>Lee</item>
+        <item>Kim</item>
+        <item>Choi</item>
+        <item>Han</item>
+        <item>Park</item>
     </string-array>
 </resources>
