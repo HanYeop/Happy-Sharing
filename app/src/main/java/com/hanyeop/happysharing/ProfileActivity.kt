@@ -17,8 +17,10 @@ class ProfileActivity : AppCompatActivity() {
     // ActivityMainBinding 선언
     private lateinit var binding : ActivityProfileBinding
 
-    // uid 선언
-    private var uid : String? = null
+    private var uId : String? = null
+    private var userId : String? = null
+    private var imageUri : String? = null
+    private var score : Int? = null
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
@@ -31,18 +33,33 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // uid 불러오기
-        uid = FirebaseAuth.getInstance().currentUser?.uid
+        uId = FirebaseAuth.getInstance().currentUser?.uid
+
+        // 프로필 불러오기
+        firebaseViewModel.profileLoad(uId!!)
+        firebaseViewModel.userId.observe(this,{
+            userId = it
+            binding.idEditView.setText(userId.toString())
+        })
+        firebaseViewModel.imageUri.observe(this,{
+            imageUri = it
+        })
+        firebaseViewModel.score.observe(this,{
+            score = it
+        })
 
         // 프로필 편집
         binding.apply {
+
+            // TODO : NULL 처리
             button.setOnClickListener {
                 var userDTO = UserDTO()
-                userDTO.uid = uid
+                userDTO.uId = uId
                 userDTO.userId = idEditView.text.toString()
-                userDTO.imageUri = ""
-                userDTO.score = 0
+                userDTO.imageUri = imageUri!!
+                userDTO.score = score!!
 
-                firebaseViewModel.profileEdit(uid!!,userDTO)
+                firebaseViewModel.profileEdit(uId!!,userDTO)
                 Toast.makeText(this@ProfileActivity,"변경 완료",Toast.LENGTH_SHORT).show()
 
                 finish()

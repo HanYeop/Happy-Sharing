@@ -9,8 +9,11 @@ import com.hanyeop.happysharing.util.Constants
 
 class FirebaseRepository() {
 
-    // 유저 이름
-    val name = MutableLiveData<String>()
+    val uId = MutableLiveData<String>() // uid
+    val userId = MutableLiveData<String>() // 유저 이름
+    val imageUri = MutableLiveData<String>() // 유저 사진
+    val score = MutableLiveData<Int>() // 유저 점수
+
     // Firestore 초기화
     private val fireStore = FirebaseFirestore.getInstance()
 
@@ -22,9 +25,11 @@ class FirebaseRepository() {
 
                 val userDTO = documentSnapshot.toObject(UserDTO::class.java)
                 if (userDTO?.userId != null) {
-                    Log.d(Constants.TAG, "profileLoad: ${userDTO.userId}")
-                    // 이름 변경
-                    name.value = userDTO.userId.toString()
+
+                    uId.value = userDTO.uId.toString()
+                    userId.value = userDTO.userId.toString()
+                    imageUri.value = userDTO.imageUri.toString()
+                    score.value = userDTO.score
                 }
             }
     }

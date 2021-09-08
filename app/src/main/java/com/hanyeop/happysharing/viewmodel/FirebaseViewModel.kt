@@ -10,7 +10,10 @@ import com.hanyeop.happysharing.repository.FirebaseRepository
 class FirebaseViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : FirebaseRepository = FirebaseRepository()
-    val name = repository.name
+    val uId = repository.uId
+    val userId = repository.userId
+    val imageUri = repository.imageUri
+    val score = repository.score
 
     // 프로필 불러오기
     fun profileLoad(uid : String){

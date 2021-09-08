@@ -34,7 +34,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
     // Firebase
     private var auth : FirebaseAuth? = null
-    private var uid : String? = null
+    private var uId : String? = null
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
@@ -47,7 +47,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
         // firebase 초기화
         auth = FirebaseAuth.getInstance()
-        uid = FirebaseAuth.getInstance().currentUser?.uid
+        uId = FirebaseAuth.getInstance().currentUser?.uid
 
         binding.apply {
             // 로그아웃 버튼
@@ -62,10 +62,10 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         }
 
         // 프로필 불러오기
-        firebaseViewModel.profileLoad(uid!!)
+        firebaseViewModel.profileLoad(uId!!)
 
         // 유저 이름 동기화
-        firebaseViewModel.name.observe(viewLifecycleOwner,{
+        firebaseViewModel.userId.observe(viewLifecycleOwner,{
             binding.userIdText.text = it
         })
     }
