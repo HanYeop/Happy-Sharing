@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
 
@@ -29,5 +30,10 @@ class FirebaseRepository() {
     // 프로필 수정하기
     fun profileEdit(uid : String, userDTO: UserDTO) {
         fireStore.collection("users").document(uid).set(userDTO)
+    }
+
+    // 아이템 업로드하기
+    fun uploadItem(time: Long, itemDTO: ItemDTO){
+        fireStore.collection("item").document(time.toString()).set(itemDTO)
     }
 }
