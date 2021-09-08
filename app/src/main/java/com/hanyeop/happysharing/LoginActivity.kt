@@ -56,14 +56,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // 자동 로그인
+        moveMainPage(auth?.currentUser)
+    }
+
     // 구글 로그인
-    fun googleLogin(){
+    private fun googleLogin(){
         var signInIntent = googleSignInClient?.signInIntent
         startActivityForResult(signInIntent,GOOGLE_LOGIN_CODE)
     }
 
     // 구글 로그인 확인
-    fun firebaseAuthWithGoogle(account : GoogleSignInAccount?){
+    private fun firebaseAuthWithGoogle(account : GoogleSignInAccount?){
         var credential = GoogleAuthProvider.getCredential(account?.idToken,null)
         auth?.signInWithCredential(credential)
             ?.addOnCompleteListener{
@@ -96,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // 유저정보 넘겨주고 메인 액티비티 호출
-    fun moveMainPage(user: FirebaseUser?){
+    private fun moveMainPage(user: FirebaseUser?){
         if( user!= null){
             val intent = Intent(this,MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
