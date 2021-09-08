@@ -31,7 +31,7 @@
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/kategorieText"
+                android:id="@+id/categorieText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -50,8 +50,8 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/kategorieText"
-                app:layout_constraintTop_toBottomOf="@+id/kategorieText" />
+                app:layout_constraintStart_toStartOf="@+id/categorieText"
+                app:layout_constraintTop_toBottomOf="@+id/categorieText" />
 
             <TextView
                 android:id="@+id/userText"

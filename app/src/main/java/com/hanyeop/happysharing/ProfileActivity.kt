@@ -18,9 +18,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding : ActivityProfileBinding
 
     private var uId : String? = null
-    private var userId : String? = null
-    private var imageUri : String? = null
-    private var score : Int? = null
+    private var userDTO = UserDTO()
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
@@ -37,15 +35,9 @@ class ProfileActivity : AppCompatActivity() {
 
         // 프로필 불러오기
         firebaseViewModel.profileLoad(uId!!)
-        firebaseViewModel.userId.observe(this,{
-            userId = it
-            binding.idEditView.setText(userId.toString())
-        })
-        firebaseViewModel.imageUri.observe(this,{
-            imageUri = it
-        })
-        firebaseViewModel.score.observe(this,{
-            score = it
+        firebaseViewModel.userDTO.observe(this,{
+            userDTO = it
+            binding.idEditView.setText(userDTO.userId.toString()) // 기존 닉네임 불러오기
         })
 
         // 프로필 편집
@@ -53,11 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
             // TODO : NULL 처리
             button.setOnClickListener {
-                var userDTO = UserDTO()
-                userDTO.uId = uId
-                userDTO.userId = idEditView.text.toString()
-                userDTO.imageUri = imageUri!!
-                userDTO.score = score!!
+                userDTO.userId = idEditView.text.toString() // 입력한 닉네임으로 변경
 
                 firebaseViewModel.profileEdit(uId!!,userDTO)
                 Toast.makeText(this@ProfileActivity,"변경 완료",Toast.LENGTH_SHORT).show()

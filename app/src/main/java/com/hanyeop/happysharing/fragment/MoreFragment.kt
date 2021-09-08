@@ -65,8 +65,8 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         firebaseViewModel.profileLoad(uId!!)
 
         // 유저 이름 동기화
-        firebaseViewModel.userId.observe(viewLifecycleOwner,{
-            binding.userIdText.text = it
+        firebaseViewModel.userDTO.observe(viewLifecycleOwner,{
+            binding.userIdText.text = it.userId
         })
     }
 
