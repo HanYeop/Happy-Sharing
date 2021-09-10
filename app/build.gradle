@@ -68,4 +68,5 @@ dependencies {
 
     // 뷰모델 생성하기 쉽게 해줌
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    implementation "androidx.activity:activity-ktx:1.2.0"
 }

@@ -1,5 +1,6 @@
 package com.hanyeop.happysharing
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
             navController = navHostFragment.findNavController()
             bottomNavigationView.setupWithNavController(navController)
+
+            // 물건 추가 버튼
+            addButton.setOnClickListener {
+                val intent = Intent(this@MainActivity,UploadActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
