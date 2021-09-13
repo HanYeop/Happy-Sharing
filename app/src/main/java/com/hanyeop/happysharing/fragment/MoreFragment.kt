@@ -42,6 +42,8 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d(TAG, "onViewCreated: 실행")
+
         // 뷰바인딩
         _binding = FragmentMoreBinding.bind(view)
 
@@ -66,6 +68,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
         // 유저 이름 동기화
         firebaseViewModel.userDTO.observe(viewLifecycleOwner,{
+            Log.d(TAG, "onViewCreated: 유저 이름 동기화됨")
             binding.userIdText.text = it.userId
         })
     }
