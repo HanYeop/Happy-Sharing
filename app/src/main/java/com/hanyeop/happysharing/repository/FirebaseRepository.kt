@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
@@ -35,5 +36,24 @@ class FirebaseRepository() {
     // 아이템 업로드하기
     fun uploadItem(time: Long, itemDTO: ItemDTO){
         fireStore.collection("item").document(time.toString()).set(itemDTO)
+    }
+
+    // 아이템 리스트 불러오기
+    fun importItem(): ArrayList<ItemDTO>{
+        val itemList = arrayListOf<ItemDTO>()
+
+        fireStore.collection("item").orderBy("timestamp",
+            Query.Direction.DESCENDING).addSnapshotListener { querySnapshot, _ ->
+            itemList.clear() // 리스트 초기화
+
+            if(querySnapshot == null) return@addSnapshotListener
+
+            // 리스트 불러오기
+            for(snapshot in querySnapshot.documents){
+                var item = snapshot.toObject(ItemDTO::class.java)
+                itemList.add(item!!)
+            }
+        }
+        return itemList
     }
 }

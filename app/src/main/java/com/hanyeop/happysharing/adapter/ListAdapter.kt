@@ -1,21 +1,22 @@
 package com.hanyeop.happysharing.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
+import com.hanyeop.happysharing.model.ItemDTO
 
-class ListAdapter(val titleList : Array<String>, val userList : Array<String>)
+class ListAdapter(private val itemList: ArrayList<ItemDTO>)
     : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     // 생성된 뷰 홀더에 값 지정
-    class ListViewHolder(val binding: ItemObjectBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ListViewHolder(private val binding: ItemObjectBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(title: String, user: String) {
-            // 뷰 홀더의 제목과 설명
-            binding.titleText.text = title
-            binding.userText.text = user
+        fun bind(item : ItemDTO) {
+
+            binding.apply {
+                titleText.text = item.title
+            }
 
 //            // 뷰 홀더 클릭시 디테일뷰로
 //            binding.cardView.setOnClickListener {
@@ -35,11 +36,11 @@ class ListAdapter(val titleList : Array<String>, val userList : Array<String>)
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(titleList[position],userList[position])
+        holder.bind(itemList[position])
     }
 
     // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
-        return titleList.size
+        return itemList.size
     }
 }

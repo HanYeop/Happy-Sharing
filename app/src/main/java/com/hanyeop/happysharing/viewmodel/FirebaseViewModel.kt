@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.repository.FirebaseRepository
@@ -27,5 +28,10 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     // 아이템 업로드하기
     fun uploadItem(time: Long, itemDTO: ItemDTO){
         repository.uploadItem(time, itemDTO)
+    }
+
+    // 아이템 리스트 불러오기
+    fun importItem(): ArrayList<ItemDTO>{
+        return repository.importItem()
     }
 }
