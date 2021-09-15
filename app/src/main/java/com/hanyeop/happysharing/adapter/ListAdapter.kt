@@ -1,13 +1,45 @@
 package com.hanyeop.happysharing.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
 
-class ListAdapter(private val itemList: ArrayList<ItemDTO>)
+class ListAdapter()
     : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+
+    private var itemList: ArrayList<ItemDTO> = arrayListOf()
+
+    // Firestore 초기화
+    private val fireStore = FirebaseFirestore.getInstance()
+    private var isFirst = true // 처음 실행여부 ( 한번도 실행되지 않음 = true )
+
+    init {
+        // 아이템 리스트 불러오기
+        fireStore.collection("item").orderBy("timestamp",
+            Query.Direction.DESCENDING).addSnapshotListener { querySnapshot, _ ->
+            itemList.clear() // 리스트 초기화
+
+            if(querySnapshot == null) return@addSnapshotListener
+
+            // 리스트 불러오기
+            for(snapshot in querySnapshot.documents){
+                var item = snapshot.toObject(ItemDTO::class.java)
+                itemList.add(item!!)
+            }
+
+            // 최초 실행 시 리스트 갱신
+            if(isFirst){
+                notifyDataSetChanged()
+                isFirst = false
+            }
+            Log.d("tst5", "테스트중: ")
+        }
+    }
 
     // 생성된 뷰 홀더에 값 지정
     class ListViewHolder(private val binding: ItemObjectBinding) : RecyclerView.ViewHolder(binding.root) {

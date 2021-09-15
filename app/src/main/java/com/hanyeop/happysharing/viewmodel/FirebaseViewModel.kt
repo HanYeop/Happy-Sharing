@@ -12,7 +12,6 @@ import com.hanyeop.happysharing.repository.FirebaseRepository
 class FirebaseViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : FirebaseRepository = FirebaseRepository()
-
     val userDTO = repository.userDTO
 
     // 프로필 불러오기
@@ -28,10 +27,5 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     // 아이템 업로드하기
     fun uploadItem(time: Long, itemDTO: ItemDTO){
         repository.uploadItem(time, itemDTO)
-    }
-
-    // 아이템 리스트 불러오기
-    fun importItem(): ArrayList<ItemDTO>{
-        return repository.importItem()
     }
 }
