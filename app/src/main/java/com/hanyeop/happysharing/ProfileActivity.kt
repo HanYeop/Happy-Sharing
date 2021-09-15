@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
@@ -18,6 +19,7 @@ import com.hanyeop.happysharing.databinding.ActivityMainBinding
 import com.hanyeop.happysharing.databinding.ActivityProfileBinding
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants.Companion.PICK_PROFILE_FROM_ALBUM
+import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 
 class ProfileActivity : AppCompatActivity() {
@@ -92,11 +94,26 @@ class ProfileActivity : AppCompatActivity() {
         // 프로필 사진 이미지 파이어베이스에 올리기
         if(requestCode == PICK_PROFILE_FROM_ALBUM && resultCode == Activity.RESULT_OK){
             var imageUri = data?.data
+
+            Log.d(TAG, "onActivityResult: $imageUri")
+
+            Glide.with(this@ProfileActivity).load(imageUri)
+                .placeholder(R.drawable.ic_baseline_person_24)
+                .apply(RequestOptions().circleCrop()).into(binding.profileImageView)
+
             var storageRef = FirebaseStorage.getInstance().reference.child("userProfileImages").child(uId!!)
             storageRef.putFile(imageUri!!).continueWithTask { _: Task<UploadTask.TaskSnapshot> ->
                 return@continueWithTask storageRef.downloadUrl
             }.addOnSuccessListener { uri ->
                 userDTO.imageUri = uri.toString()
+
+                Log.d(TAG, "onActivityResult: ${uri.toString()}")
+
+                firebaseViewModel.profileEdit(userDTO)
+
+//                Glide.with(this@ProfileActivity).load(uri.toString())
+//                    .placeholder(R.drawable.ic_baseline_person_24)
+//                    .apply(RequestOptions().circleCrop()).into(binding.profileImageView)
 
 //                var map = HashMap<String,Any>()
 //                map["image"] = uri.toString()
