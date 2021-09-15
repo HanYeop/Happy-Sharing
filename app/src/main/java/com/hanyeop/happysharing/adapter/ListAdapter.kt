@@ -37,7 +37,6 @@ class ListAdapter()
                 notifyDataSetChanged()
                 isFirst = false
             }
-            Log.d("tst5", "테스트중: ")
         }
     }
 

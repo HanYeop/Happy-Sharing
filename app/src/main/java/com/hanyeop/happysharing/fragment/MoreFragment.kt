@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -66,10 +68,17 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         // 프로필 불러오기
         firebaseViewModel.profileLoad(uId!!)
 
-        // 유저 이름 동기화
+        // 유저 정보 동기화
         firebaseViewModel.userDTO.observe(viewLifecycleOwner,{
-            Log.d(TAG, "onViewCreated: 유저 이름 동기화됨")
-            binding.userIdText.text = it.userId
+            Log.d(TAG, "onViewCreated: 유저 정보 동기화됨")
+            binding.apply {
+                userIdText.text = it.userId
+                scoreNumberText.text = it.score.toString()
+                shareNumberText.text = it.sharing.toString()
+                Glide.with(requireActivity()).load(it.imageUri)
+                    .placeholder(R.drawable.ic_baseline_person_24)
+                    .apply(RequestOptions().circleCrop()).into(userImageView)
+            }
         })
     }
 

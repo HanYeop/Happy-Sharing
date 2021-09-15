@@ -37,7 +37,7 @@
             android:layout_marginRight="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idEditView"
+                android:id="@+id/userIdEditView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -64,7 +64,7 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signinButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"

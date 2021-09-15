@@ -20,8 +20,8 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     }
 
     // 프로필 수정하기
-    fun profileEdit(uid: String, userDTO: UserDTO) {
-        repository.profileEdit(uid, userDTO)
+    fun profileEdit(userDTO: UserDTO) {
+        repository.profileEdit(userDTO)
     }
 
     // 아이템 업로드하기

@@ -8,6 +8,7 @@ import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
+import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
 class FirebaseRepository() {
 
@@ -26,12 +27,18 @@ class FirebaseRepository() {
                 if (userDTO?.userId != null) {
                     this.userDTO.value = userDTO!!
                 }
+
+                else if(userDTO?.userId == null){
+                    Log.d(TAG, "아이디가 존재하지 않음")
+                    val newUserDTO = UserDTO(uid,"사용자","default",0,0)
+                    fireStore.collection("users").document(uid).set(newUserDTO)
+                }
             }
     }
 
     // 프로필 수정하기
-    fun profileEdit(uid : String, userDTO: UserDTO) {
-        fireStore.collection("users").document(uid).set(userDTO)
+    fun profileEdit(userDTO: UserDTO) {
+        fireStore.collection("users").document(userDTO.uId!!).set(userDTO)
     }
 
     // 아이템 업로드하기
