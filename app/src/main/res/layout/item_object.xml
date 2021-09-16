@@ -28,7 +28,9 @@
                 android:layout_height="130dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                app:srcCompat="@drawable/ic_launcher_foreground"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:id="@+id/categorieText"

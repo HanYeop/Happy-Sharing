@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
@@ -51,6 +52,10 @@ class ListAdapter()
                 categorieText.text = item.category
 //                dateText.text = item.timestamp
                 areaText.text = item.area
+
+                Glide.with(imageView.context)
+                    .load(item.imageUri)
+                    .into(imageView)
             }
 
 //            // 뷰 홀더 클릭시 디테일뷰로
