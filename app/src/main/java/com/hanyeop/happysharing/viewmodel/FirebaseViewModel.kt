@@ -25,7 +25,7 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     }
 
     // 아이템 업로드하기
-    fun uploadItem(time: Long, itemDTO: ItemDTO){
-        repository.uploadItem(time, itemDTO)
+    fun uploadItem(itemDTO: ItemDTO){
+        repository.uploadItem(itemDTO)
     }
 }

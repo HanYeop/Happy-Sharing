@@ -1,6 +1,7 @@
 package com.hanyeop.happysharing
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.hanyeop.happysharing.databinding.ActivityUploadBinding
+import com.hanyeop.happysharing.dialog.LoadingDialog
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
@@ -31,10 +36,14 @@ class UploadActivity : AppCompatActivity() {
     private var imageCheck = false // 이미지 등록 여부
     private lateinit var imageUri : Uri
     private var category : String? = null
+    private lateinit var dialog : Dialog
+
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
 
+
+    // TODO 이미지 삭제?
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,6 +60,8 @@ class UploadActivity : AppCompatActivity() {
             itemDTO.uId = it.uId
         })
 
+        // 다이얼로그 초기화
+        dialog = LoadingDialog(this)
 
         binding.apply {
             // 둥근 테두리
@@ -115,6 +126,7 @@ class UploadActivity : AppCompatActivity() {
 
                 // 조건을 모두 만족했을 때
                 else{
+                    dialog.show()
                     uploadItem(titleText,contextText,areaText)
                 }
             }
@@ -130,16 +142,24 @@ class UploadActivity : AppCompatActivity() {
     private fun uploadItem(title: String, content: String, area: String){
 
         val time = System.currentTimeMillis()
-        itemDTO.imageUrl = ""
         itemDTO.title = title
         itemDTO.content = content
         itemDTO.timestamp = time
         itemDTO.category = category
         itemDTO.area = area
 
-        firebaseViewModel.uploadItem(time, itemDTO)
-        Toast.makeText(this@UploadActivity, "추가가 완료되었습니다. 새로고침하여 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
-        finish()
+        var storageRef =
+            FirebaseStorage.getInstance().reference.child("ItemImage").child("${uId}_$time")
+        storageRef.putFile(imageUri!!).continueWithTask { _: Task<UploadTask.TaskSnapshot> ->
+            return@continueWithTask storageRef.downloadUrl
+        }.addOnSuccessListener { uri ->
+            // 이미지가 업로드 되면 불러오고 종료
+            itemDTO.imageUri = uri.toString()
+            firebaseViewModel.uploadItem(itemDTO)
+            Toast.makeText(this@UploadActivity, "추가가 완료되었습니다. 새로고침하여 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            finish()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

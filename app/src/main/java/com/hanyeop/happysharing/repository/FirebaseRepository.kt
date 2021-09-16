@@ -42,7 +42,7 @@ class FirebaseRepository() {
     }
 
     // 아이템 업로드하기
-    fun uploadItem(time: Long, itemDTO: ItemDTO){
-        fireStore.collection("item").document(time.toString()).set(itemDTO)
+    fun uploadItem(itemDTO: ItemDTO){
+        fireStore.collection("item").document(itemDTO.timestamp.toString()).set(itemDTO)
     }
 }
