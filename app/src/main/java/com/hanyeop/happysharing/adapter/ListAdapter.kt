@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
+import com.hanyeop.happysharing.util.Utility
 
 class ListAdapter()
     : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
@@ -50,7 +51,7 @@ class ListAdapter()
             binding.apply {
                 titleText.text = item.title
                 categorieText.text = item.category
-//                dateText.text = item.timestamp
+                dateText.text = Utility.timeConverter(item.timestamp!!)
                 areaText.text = item.area
 
                 Glide.with(imageView.context)
