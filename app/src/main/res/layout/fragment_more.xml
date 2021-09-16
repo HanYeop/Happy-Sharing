@@ -33,7 +33,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="이름"
+                        android:text=""
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
@@ -67,7 +67,7 @@
                             android:id="@+id/scoreNumberText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10"
+                            android:text="0"
                             android:textColor="@color/main_green"
                             android:textSize="24sp" />
 
@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="5"
+                            android:text="0"
                             android:textColor="@color/main_green"
                             android:textSize="24sp" />
 

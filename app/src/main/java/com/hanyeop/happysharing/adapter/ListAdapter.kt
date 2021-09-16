@@ -9,6 +9,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
+import com.hanyeop.happysharing.model.UserDTO
+import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Utility
 
 class ListAdapter()
@@ -43,17 +45,28 @@ class ListAdapter()
     }
 
     // 생성된 뷰 홀더에 값 지정
-    class ListViewHolder(private val binding: ItemObjectBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(private val binding: ItemObjectBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        // 아이템 정보 바인딩
         fun bind(item : ItemDTO) {
 
-            // TODO uid로 점수 불러오기
             binding.apply {
                 titleText.text = item.title
                 categorieText.text = item.category
                 dateText.text = Utility.timeConverter(item.timestamp!!)
                 areaText.text = item.area
 
+                // 유저 정보 불러옴
+                fireStore.collection("users").document(item.uId!!).get()
+                    .addOnCompleteListener { documentSnapshot->
+
+                        if(documentSnapshot.isSuccessful){
+                            val userDTO = documentSnapshot.result.toObject(UserDTO::class.java)
+                            userText.text = userDTO!!.userId
+                            scoreNumberText.text = userDTO!!.score.toString()
+                            shareNumberText.text = userDTO!!.sharing.toString()
+                        }
+                    }
                 Glide.with(imageView.context)
                     .load(item.imageUri)
                     .into(imageView)

@@ -26,9 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="20"
+            android:maxLines="1"
             android:drawableLeft="@drawable/ic_baseline_title_24"
             android:drawablePadding="10dp"
             android:textSize="16sp"
+            android:inputType="text"
             android:hint="제목" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -15,6 +15,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,9 @@
             android:background="@color/white"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:inputType="text"
             android:hint="닉네임" />
     </com.google.android.material.textfield.TextInputLayout>
 
