@@ -7,5 +7,6 @@ class Constants {
 
         const val GOOGLE_LOGIN_CODE = 9001
         const val PICK_PROFILE_FROM_ALBUM = 10
+        const val PICK_ITEM_IMAGE_FROM_ALBUM = 20
     }
 }

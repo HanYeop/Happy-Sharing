@@ -65,11 +65,11 @@
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <TextView
-        android:id="@+id/userIdText"
+    <EditText
+        android:id="@+id/areaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저 아이디"
+        android:text="전주시 덕진구"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"

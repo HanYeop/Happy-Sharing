@@ -45,8 +45,12 @@ class ListAdapter()
 
         fun bind(item : ItemDTO) {
 
+            // TODO uid로 점수 불러오기
             binding.apply {
                 titleText.text = item.title
+                categorieText.text = item.category
+//                dateText.text = item.timestamp
+                areaText.text = item.area
             }
 
 //            // 뷰 홀더 클릭시 디테일뷰로

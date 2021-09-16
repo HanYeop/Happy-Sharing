@@ -48,10 +48,7 @@ class UploadActivity : AppCompatActivity() {
         // 프로필 불러오기
         firebaseViewModel.profileLoad(uId!!)
         firebaseViewModel.userDTO.observe(this,{
-            binding.userIdText.text = it.userId.toString() // 닉네임 불러오기
-
             itemDTO.uId = it.uId
-            itemDTO.userId = it.userId
         })
 
 
@@ -88,7 +85,7 @@ class UploadActivity : AppCompatActivity() {
                 var photoPickerIntent = Intent(Intent.ACTION_PICK)
                 photoPickerIntent.type = "image/*"
                 this@UploadActivity.startActivityForResult(photoPickerIntent,
-                    Constants.PICK_PROFILE_FROM_ALBUM
+                    Constants.PICK_ITEM_IMAGE_FROM_ALBUM
                 )
             }
 
@@ -97,6 +94,7 @@ class UploadActivity : AppCompatActivity() {
 
                 val titleText = titleEditView.text.toString()
                 val contextText = contentEditView.text.toString()
+                val areaText = areaText.text.toString()
 
                 // 필수 입력 조건 체크
                 if(titleText.isEmpty()){
@@ -111,10 +109,13 @@ class UploadActivity : AppCompatActivity() {
                 else if(category == null){
                     Toast.makeText(this@UploadActivity, "카테고리를 선택해주세요", Toast.LENGTH_SHORT).show()
                 }
+                else if(areaText.isEmpty()){
+                    Toast.makeText(this@UploadActivity, "지역을 선택해주세요", Toast.LENGTH_SHORT).show()
+                }
 
                 // 조건을 모두 만족했을 때
                 else{
-                    uploadItem(titleText,contextText)
+                    uploadItem(titleText,contextText,areaText)
                 }
             }
 
@@ -126,7 +127,7 @@ class UploadActivity : AppCompatActivity() {
     }
 
     // 아이템 업로드하기
-    private fun uploadItem(title: String, content: String){
+    private fun uploadItem(title: String, content: String, area: String){
 
         val time = System.currentTimeMillis()
         itemDTO.imageUrl = ""
@@ -134,6 +135,7 @@ class UploadActivity : AppCompatActivity() {
         itemDTO.content = content
         itemDTO.timestamp = time
         itemDTO.category = category
+        itemDTO.area = area
 
         firebaseViewModel.uploadItem(time, itemDTO)
         Toast.makeText(this@UploadActivity, "추가가 완료되었습니다. 새로고침하여 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
@@ -144,7 +146,7 @@ class UploadActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         // 아이템 이미지 미리 보여주기
-        if(requestCode == Constants.PICK_PROFILE_FROM_ALBUM && resultCode == Activity.RESULT_OK){
+        if(requestCode == Constants.PICK_ITEM_IMAGE_FROM_ALBUM && resultCode == Activity.RESULT_OK){
             imageCheck = true
 
             imageUri = data?.data!!
