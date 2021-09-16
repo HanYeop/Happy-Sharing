@@ -36,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
     private var imageUri : Uri? = null
     private lateinit var dialog : Dialog
 
-    private var delete = false
+    private var delete = false // 이미지 삭제 여부
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
@@ -82,9 +82,7 @@ class ProfileActivity : AppCompatActivity() {
                 Glide.with(this@ProfileActivity).load("")
                     .placeholder(R.drawable.ic_baseline_person_24)
                     .apply(RequestOptions().circleCrop()).into(binding.profileImageView)
-
-                // 삭제
-                delete = true
+                delete = true // 삭제
             }
 
             // 취소 버튼

@@ -1,25 +1,16 @@
 <resources>
     <string name="app_name">HappySharing</string>
 
-    <string-array name="item_title">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
-        <item>Item 4</item>
-        <item>Item 5</item>
-        <item>Item 6</item>
-        <item>Item 7</item>
-        <item>Item 8</item>
+    <string-array name="category">
+        <item>카테고리</item>
+        <item>전자기기</item>
+        <item>남성의류</item>
+        <item>여성의류</item>
+        <item>가구/생활가전</item>
+        <item>도서</item>
+        <item>음식</item>
+        <item>잡화</item>
+        <item>기타</item>
     </string-array>
 
-    <string-array name="item_user">
-        <item>Han</item>
-        <item>Kim</item>
-        <item>Lee</item>
-        <item>Lee</item>
-        <item>Kim</item>
-        <item>Choi</item>
-        <item>Han</item>
-        <item>Park</item>
-    </string-array>
 </resources>

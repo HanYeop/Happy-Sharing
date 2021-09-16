@@ -6,5 +6,6 @@ data class ItemDTO(
     var imageUrl : String? = null,
     var title : String? = null,
     var content : String? = null,
-    var timestamp : Long? = null
+    var timestamp : Long? = null,
+    var category : String? = null
 )
