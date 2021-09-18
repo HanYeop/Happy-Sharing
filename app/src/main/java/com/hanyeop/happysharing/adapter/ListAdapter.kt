@@ -51,10 +51,10 @@ class ListAdapter()
         fun bind(item : ItemDTO) {
 
             binding.apply {
-                titleText.text = item.title
-                categorieText.text = item.category
-                dateText.text = Utility.timeConverter(item.timestamp!!)
-                areaText.text = item.area
+//                titleText.text = item.title
+//                categoryText.text = item.category
+//                dateText.text = Utility.timeConverter(item.timestamp!!)
+//                areaText.text = item.area
 
                 // 유저 정보 불러옴
                 fireStore.collection("users").document(item.uId!!).get()
@@ -65,11 +65,20 @@ class ListAdapter()
                             userText.text = userDTO!!.userId
                             scoreNumberText.text = userDTO!!.score.toString()
                             shareNumberText.text = userDTO!!.sharing.toString()
+
+                            titleText.text = item.title
+                            categoryText.text = item.category
+                            dateText.text = Utility.timeConverter(item.timestamp!!)
+                            areaText.text = item.area
+
+                            Glide.with(imageView.context)
+                                .load(item.imageUri)
+                                .into(imageView)
                         }
                     }
-                Glide.with(imageView.context)
-                    .load(item.imageUri)
-                    .into(imageView)
+//                Glide.with(imageView.context)
+//                    .load(item.imageUri)
+//                    .into(imageView)
             }
 
 //            // 뷰 홀더 클릭시 디테일뷰로

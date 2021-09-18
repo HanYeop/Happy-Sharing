@@ -103,6 +103,7 @@ class ProfileActivity : AppCompatActivity() {
                     // 이미지를 변경하지 않았을 때
                     imageUri == null -> {
                         firebaseViewModel.profileEdit(userDTO)
+                        Toast.makeText(this@ProfileActivity,"변경 완료",Toast.LENGTH_SHORT).show()
                         finish()
                     }
                     // 이미지를 변경했을 때
