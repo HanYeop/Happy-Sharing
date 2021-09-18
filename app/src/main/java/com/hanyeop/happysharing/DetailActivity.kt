@@ -23,7 +23,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-            textView2.text = args.itemDTO.title
+//            textView2.text = args.itemDTO.title
         }
 
         Log.d(TAG, "onCreate: ${args.itemDTO} \n ${args.userDTO}")

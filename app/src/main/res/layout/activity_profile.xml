@@ -61,34 +61,34 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="프로필 사진 변경"
-        android:textColor="#E6290FBA"
+        android:textColor="#BF290FBA"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:text="수정 완료"
-        android:textColor="#E6290FBA"
-        android:textSize="20sp"
+        android:background="@drawable/rounded_corner_border"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:text="취소"
-        android:textColor="#E6FF2442"
-        android:textSize="20sp"
+        android:background="@drawable/rounded_corner_border"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

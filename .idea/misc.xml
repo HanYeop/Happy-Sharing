@@ -14,7 +14,7 @@
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_detail.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_main.xml" value="0.3515625" />
-        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_profile.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_upload.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/dialog_loading.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/fragment_chat.xml" value="0.36614583333333334" />
@@ -26,6 +26,7 @@
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/menu_gallery.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/menu_item.xml" value="0.3605128205128205" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3764102564102564" />
       </map>
     </option>
   </component>
