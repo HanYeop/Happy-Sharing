@@ -1,7 +1,11 @@
 package com.hanyeop.happysharing.fragment
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.widget.TextView
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.tasks.Tasks.await
@@ -30,6 +34,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         // 뷰바인딩
         _binding = FragmentListBinding.bind(view)
 
+        // 툴바 텍스트 변경
+        val toolbarTitle : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbarTitle.title = "목록"
+
+//        setHasOptionsMenu(true)
+
         binding.apply {
             // 리사이클러뷰 어댑터 연결
             listAdapter = ListAdapter()
@@ -48,4 +58,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         super.onDestroyView()
         _binding = null
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//
+//        inflater.inflate(R.menu.menu_gallery,menu)
+//    }
 }
