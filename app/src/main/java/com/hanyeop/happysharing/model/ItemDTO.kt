@@ -1,5 +1,9 @@
 package com.hanyeop.happysharing.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ItemDTO(
     var uId : String? = null,
     var imageUri : String? = null,
@@ -8,4 +12,4 @@ data class ItemDTO(
     var timestamp : Long? = null,
     var category : String? = null,
     var area : String? = null
-)
+)  : Parcelable

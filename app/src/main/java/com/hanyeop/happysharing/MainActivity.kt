@@ -3,6 +3,7 @@ package com.hanyeop.happysharing
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -11,7 +12,6 @@ import com.hanyeop.happysharing.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // ActivityMainBinding 선언
     private lateinit var binding : ActivityMainBinding
 
     // NavController 선언

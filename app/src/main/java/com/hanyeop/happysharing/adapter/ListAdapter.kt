@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Utility
 
-class ListAdapter()
+class ListAdapter(private val listener : OnItemClickListener)
     : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private var itemList: ArrayList<ItemDTO> = arrayListOf()
@@ -73,12 +74,15 @@ class ListAdapter()
 
                             Glide.with(imageView.context)
                                 .load(item.imageUri)
+                                .placeholder(R.color.grey)
                                 .into(imageView)
+
+                            // 아이템 클릭 시
+                           root.setOnClickListener {
+                               listener.onItemClick(item,userDTO)
+                            }
                         }
                     }
-//                Glide.with(imageView.context)
-//                    .load(item.imageUri)
-//                    .into(imageView)
             }
 
 //            // 뷰 홀더 클릭시 디테일뷰로
@@ -105,5 +109,10 @@ class ListAdapter()
     // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    // 아이템 포지션 넘겨주기 위한 인터페이스
+    interface OnItemClickListener {
+        fun onItemClick(itemDTO: ItemDTO, userDTO: UserDTO)
     }
 }

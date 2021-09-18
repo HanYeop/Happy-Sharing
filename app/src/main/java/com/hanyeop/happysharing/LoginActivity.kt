@@ -17,7 +17,6 @@ import com.hanyeop.happysharing.util.Constants.Companion.GOOGLE_LOGIN_CODE
 
 class LoginActivity : AppCompatActivity() {
 
-    // ActivityMainBinding 선언
     private lateinit var binding : ActivityLoginBinding
 
     // 파이어베이스 계정 선언

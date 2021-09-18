@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappySharing">
         <activity
-            android:name=".UploadActivity"
+            android:name=".DetailActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UploadActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProfileActivity"
             android:exported="true"
@@ -30,7 +34,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

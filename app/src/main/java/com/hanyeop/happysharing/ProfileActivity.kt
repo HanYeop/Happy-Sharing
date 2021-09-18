@@ -27,7 +27,6 @@ import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 
 class ProfileActivity : AppCompatActivity() {
 
-    // ActivityMainBinding 선언
     private lateinit var binding : ActivityProfileBinding
 
     private var uId : String? = null

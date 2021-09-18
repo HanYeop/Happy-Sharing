@@ -27,7 +27,6 @@ import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 
 class UploadActivity : AppCompatActivity() {
 
-    // ActivityUploadBinding 선언
     private lateinit var binding : ActivityUploadBinding
 
     private var uId : String? = null
