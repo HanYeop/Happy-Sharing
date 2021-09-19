@@ -26,7 +26,7 @@
             android:id="@+id/userIdEditView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/editview_border"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"
             android:maxLines="1"

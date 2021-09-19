@@ -32,7 +32,7 @@
             android:drawablePadding="10dp"
             android:textSize="16sp"
             android:inputType="text"
-            android:background="@color/white"
+            android:background="@drawable/editview_border"
             android:hint="제목" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:background="@color/white"
+            android:background="@drawable/editview_border"
             android:hint="내용"
             android:maxLength="200" />
     </com.google.android.material.textfield.TextInputLayout>
