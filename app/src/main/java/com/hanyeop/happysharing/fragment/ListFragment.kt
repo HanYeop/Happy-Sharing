@@ -67,7 +67,13 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         _binding = null
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    // 본인 업로드 시 목록 갱신 위함
+    override fun onResume() {
+        super.onResume()
+        listAdapter.notifyDataSetChanged()
+    }
+
+    //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 //        super.onCreateOptionsMenu(menu, inflater)
 //
 //        inflater.inflate(R.menu.menu_gallery,menu)

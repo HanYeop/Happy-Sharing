@@ -117,10 +117,10 @@ class UploadActivity : AppCompatActivity() {
                     Toast.makeText(this@UploadActivity, "이미지 추가는 필수입니다.", Toast.LENGTH_SHORT).show()
                 }
                 else if(category == null){
-                    Toast.makeText(this@UploadActivity, "카테고리를 선택해주세요", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@UploadActivity, "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }
                 else if(areaText.isEmpty()){
-                    Toast.makeText(this@UploadActivity, "지역을 선택해주세요", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@UploadActivity, "지역을 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }
 
                 // 조건을 모두 만족했을 때
@@ -155,7 +155,7 @@ class UploadActivity : AppCompatActivity() {
             // 이미지가 업로드 되면 불러오고 종료
             itemDTO.imageUri = uri.toString()
             firebaseViewModel.uploadItem(itemDTO)
-            Toast.makeText(this@UploadActivity, "추가가 완료되었습니다. 새로고침하여 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@UploadActivity, "추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
             finish()
         }
