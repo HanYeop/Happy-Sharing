@@ -143,6 +143,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Toast.makeText(this@ProfileActivity,"변경 완료",Toast.LENGTH_SHORT).show()
+                firebaseViewModel.profileEdit(userDTO)
                 dialog.dismiss()
                 finish()
             }
