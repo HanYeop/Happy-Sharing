@@ -45,4 +45,9 @@ class FirebaseRepository() {
     fun uploadItem(itemDTO: ItemDTO){
         fireStore.collection("item").document(itemDTO.timestamp.toString()).set(itemDTO)
     }
+
+    // 아이템 삭제하기
+    fun deleteItem(itemDTO: ItemDTO){
+        fireStore.collection("item").document(itemDTO.timestamp.toString()).delete()
+    }
 }

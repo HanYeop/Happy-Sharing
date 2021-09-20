@@ -52,11 +52,6 @@ class ListAdapter(private val listener : OnItemClickListener)
         fun bind(item : ItemDTO) {
 
             binding.apply {
-//                titleText.text = item.title
-//                categoryText.text = item.category
-//                dateText.text = Utility.timeConverter(item.timestamp!!)
-//                areaText.text = item.area
-
                 // 유저 정보 불러옴
                 fireStore.collection("users").document(item.uId!!).get()
                     .addOnCompleteListener { documentSnapshot->
@@ -84,14 +79,6 @@ class ListAdapter(private val listener : OnItemClickListener)
                         }
                     }
             }
-
-//            // 뷰 홀더 클릭시 디테일뷰로
-//            binding.cardView.setOnClickListener {
-//                val intent: Intent = Intent(it.context, DetailViewActivity::class.java)
-//                intent.putExtra("currentName", name)
-//                intent.putExtra("currentDes", des)
-//                it.context.startActivity(intent)
-//            }
         }
     }
 

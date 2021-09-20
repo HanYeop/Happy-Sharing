@@ -28,4 +28,9 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     fun uploadItem(itemDTO: ItemDTO){
         repository.uploadItem(itemDTO)
     }
+
+    // 아이템 삭제하기
+    fun deleteItem(itemDTO: ItemDTO){
+        repository.deleteItem(itemDTO)
+    }
 }
