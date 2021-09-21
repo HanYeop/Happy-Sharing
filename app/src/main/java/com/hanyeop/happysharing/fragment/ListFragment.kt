@@ -38,7 +38,7 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
         // 툴바 텍스트 변경
         val toolbar : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.title = "목록"
+        toolbar.title = "나눔 목록"
 
 //        setHasOptionsMenu(true)
 
@@ -67,7 +67,7 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         _binding = null
     }
 
-    // 본인 업로드 시 목록 갱신 위함
+    // 본인 업로드, 삭제 시 목록 갱신 위함
     override fun onResume() {
         super.onResume()
         listAdapter.notifyDataSetChanged()

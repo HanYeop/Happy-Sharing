@@ -11,5 +11,6 @@ data class ItemDTO(
     var content : String? = null,
     var timestamp : Long? = null,
     var category : String? = null,
-    var area : String? = null
+    var area : String? = null,
+    var completed : Boolean = false
 )  : Parcelable

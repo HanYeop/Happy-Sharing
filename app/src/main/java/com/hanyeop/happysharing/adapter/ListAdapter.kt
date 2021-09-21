@@ -2,6 +2,7 @@ package com.hanyeop.happysharing.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -52,6 +53,7 @@ class ListAdapter(private val listener : OnItemClickListener)
         fun bind(item : ItemDTO) {
 
             binding.apply {
+                uiHide(binding)
                 // 유저 정보 불러옴
                 fireStore.collection("users").document(item.uId!!).get()
                     .addOnCompleteListener { documentSnapshot->
@@ -71,6 +73,9 @@ class ListAdapter(private val listener : OnItemClickListener)
                                 .load(item.imageUri)
                                 .placeholder(R.color.grey)
                                 .into(imageView)
+
+                            // 보여줄 준비가 되면
+                            uiShow(binding)
 
                             // 아이템 클릭 시
                            root.setOnClickListener {
@@ -101,5 +106,35 @@ class ListAdapter(private val listener : OnItemClickListener)
     // 아이템 포지션 넘겨주기 위한 인터페이스
     interface OnItemClickListener {
         fun onItemClick(itemDTO: ItemDTO, userDTO: UserDTO)
+    }
+
+    private fun uiHide(binding :ItemObjectBinding){
+        binding.userText.visibility = View.GONE
+        binding.scoreNumberText.visibility = View.GONE
+        binding.scoreText.visibility = View.GONE
+        binding.shareNumberText.visibility = View.GONE
+        binding.shareText.visibility = View.GONE
+        binding.titleText.visibility = View.GONE
+        binding.categoryText.visibility = View.GONE
+        binding.dateText.visibility = View.GONE
+        binding.areaText.visibility = View.GONE
+        binding.imageView.visibility = View.GONE
+
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun uiShow(binding :ItemObjectBinding){
+        binding.userText.visibility = View.VISIBLE
+        binding.scoreNumberText.visibility = View.VISIBLE
+        binding.scoreText.visibility = View.VISIBLE
+        binding.shareNumberText.visibility = View.VISIBLE
+        binding.shareText.visibility = View.VISIBLE
+        binding.titleText.visibility = View.VISIBLE
+        binding.categoryText.visibility = View.VISIBLE
+        binding.dateText.visibility = View.VISIBLE
+        binding.areaText.visibility = View.VISIBLE
+        binding.imageView.visibility = View.VISIBLE
+
+        binding.progressBar.visibility = View.GONE
     }
 }
