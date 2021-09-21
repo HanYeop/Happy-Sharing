@@ -72,6 +72,8 @@ class ChattingActivity : AppCompatActivity() {
                         chatAdapter = ChatAdapter(uId.toString(),userDTO!!)
                         messageRecyclerView.adapter = chatAdapter
 
+                        userText.text = userDTO.userId
+
                         // 채팅 맨 밑으로 스크롤
                         chatAdapter.check.observe(this@ChattingActivity){
                             messageRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
