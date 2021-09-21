@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappySharing">
         <activity
+            android:name=".ChattingActivity"
+            android:exported="true" />
+        <activity
             android:name=".DetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UploadActivity"
             android:exported="true"
