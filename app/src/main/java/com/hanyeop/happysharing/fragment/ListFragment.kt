@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.Tasks.await
+import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.FragmentListBinding
@@ -30,6 +31,9 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
     // ListAdapter 선언
     private lateinit var listAdapter: ListAdapter
 
+    // 뷰모델 연결
+    private val firebaseViewModel : FirebaseViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,6 +43,10 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         // 툴바 텍스트 변경
         val toolbar : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.title = "나눔 목록"
+
+        // 프로필 불러오기 (없으면 생성)
+        val uId = FirebaseAuth.getInstance().currentUser?.uid
+        firebaseViewModel.profileLoad(uId!!)
 
 //        setHasOptionsMenu(true)
 

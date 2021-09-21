@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.hanyeop.happysharing.databinding.ActivityDetailBinding
 import com.hanyeop.happysharing.databinding.ActivityLoginBinding
 import com.hanyeop.happysharing.dialog.LoadingDialog
-import com.hanyeop.happysharing.fragment.DetailFragmentArgs
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
@@ -27,7 +27,7 @@ import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailBinding
-    private val args by navArgs<DetailFragmentArgs>()
+    private val args by navArgs<DetailActivityArgs>()
 
     private lateinit var item : ItemDTO
     private lateinit var user: UserDTO
@@ -84,6 +84,13 @@ class DetailActivity : AppCompatActivity() {
             // 글 수정
             editButton.setOnClickListener {
 
+            }
+
+            // 채팅하기
+            chatButton.setOnClickListener {
+                val intent = Intent(this@DetailActivity,ChattingActivity::class.java)
+                intent.putExtra("itemDTO",item)
+                startActivity(intent)
             }
         }
 

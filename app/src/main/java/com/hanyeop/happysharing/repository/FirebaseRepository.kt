@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
+import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
@@ -49,5 +50,20 @@ class FirebaseRepository() {
     // 아이템 삭제하기
     fun deleteItem(itemDTO: ItemDTO){
         fireStore.collection("item").document(itemDTO.timestamp.toString()).delete()
+    }
+
+    // 메시지 전송하기
+    fun uploadChat(messageDTO: MessageDTO){
+        fireStore.collection("chat")
+            .document(messageDTO.fromUid.toString())
+            .collection(messageDTO.toUid.toString())
+            .document(messageDTO.timestamp.toString())
+            .set(messageDTO)
+
+        fireStore.collection("chat")
+            .document(messageDTO.toUid.toString())
+            .collection(messageDTO.fromUid.toString())
+            .document(messageDTO.timestamp.toString())
+            .set(messageDTO)
     }
 }

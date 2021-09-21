@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
+import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.repository.FirebaseRepository
 
@@ -32,5 +33,10 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     // 아이템 삭제하기
     fun deleteItem(itemDTO: ItemDTO){
         repository.deleteItem(itemDTO)
+    }
+
+    // 메시지 전송하기
+    fun uploadChat(messageDTO: MessageDTO){
+        repository.uploadChat(messageDTO)
     }
 }

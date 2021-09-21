@@ -11,12 +11,6 @@
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/from_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
-        <action
             android:id="@+id/action_listFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
     </fragment>
@@ -35,18 +29,6 @@
         android:name="com.hanyeop.happysharing.fragment.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.hanyeop.happysharing.fragment.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
-        <argument
-            android:name="itemDTO"
-            app:argType="com.hanyeop.happysharing.model.ItemDTO" />
-        <argument
-            android:name="userDTO"
-            app:argType="com.hanyeop.happysharing.model.UserDTO" />
-    </fragment>
     <activity
         android:id="@+id/detailActivity"
         android:name="com.hanyeop.happysharing.DetailActivity"
