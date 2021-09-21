@@ -8,12 +8,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.hanyeop.happysharing.databinding.ActivityDetailBinding
 import com.hanyeop.happysharing.databinding.ActivityLoginBinding
@@ -49,6 +51,9 @@ class DetailActivity : AppCompatActivity() {
         item = args.itemDTO
         user = args.userDTO
 
+        // 현재 uid
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+
         // 다이얼로그 초기화
         dialog = LoadingDialog(this)
 
@@ -76,21 +81,32 @@ class DetailActivity : AppCompatActivity() {
             scoreNumberText.text = user.score.toString()
             shareNumberText.text = user.sharing.toString()
 
+            // 내 글일 때만 삭제,완료 가능
+            if(item.uId == uid){
+                deleteButton.visibility = View.VISIBLE
+                chatButton.text = "양도완료"
+            }
+            else{
+                deleteButton.visibility = View.GONE
+            }
+
             // 글 삭제
             deleteButton.setOnClickListener {
                 deleteDialog(this@DetailActivity).show()
             }
 
-            // 글 수정
-            editButton.setOnClickListener {
-
-            }
-
-            // 채팅하기
             chatButton.setOnClickListener {
-                val intent = Intent(this@DetailActivity,ChattingActivity::class.java)
-                intent.putExtra("otherUid",item.uId)
-                startActivity(intent)
+                // 양도완료
+                if(item.uId == uid){
+
+                }
+
+                // 채팅하기
+                else{
+                    val intent = Intent(this@DetailActivity,ChattingActivity::class.java)
+                    intent.putExtra("otherUid",item.uId)
+                    startActivity(intent)
+                }
             }
         }
 
