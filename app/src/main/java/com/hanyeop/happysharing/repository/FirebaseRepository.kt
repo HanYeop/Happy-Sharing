@@ -2,13 +2,10 @@ package com.hanyeop.happysharing.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
 class FirebaseRepository() {

@@ -33,23 +33,17 @@ class ChatAdapter(private val currentUid: String, private val otherUser: UserDTO
     private val fireStore = FirebaseFirestore.getInstance()
 
     init {
-        // 아이템 리스트 불러오기
-        fireStore.collection("chat").document(currentUid)
-            .collection(otherUser.uId.toString()).orderBy("timestamp",
+        // 채팅 불러오기
+        fireStore.collection("chat")
+            .document(currentUid).collection(otherUser.uId.toString())
+            .orderBy("timestamp",
             Query.Direction.ASCENDING).addSnapshotListener { querySnapshot, _ ->
-//                chatList.clear() // 리스트 초기화
 
                 if(querySnapshot == null) return@addSnapshotListener
 
-//                // 리스트 불러오기
-//                for(snapshot in querySnapshot.documents){
-//                    var message = snapshot.toObject(MessageDTO::class.java)
-//                    chatList.add(message!!)
-//                }
-
                 // 문서 수신
                 for (doc in querySnapshot.documentChanges) {
-                    // 문서가 추가될 경우 리사이클러 뷰에 추가
+                    // 문서가 추가될 경우 리사이클러뷰에 추가
                     if (doc.type == DocumentChange.Type.ADDED) {
                         var message = doc.document.toObject(MessageDTO::class.java)
                         chatList.add(message)
@@ -63,7 +57,7 @@ class ChatAdapter(private val currentUid: String, private val otherUser: UserDTO
     inner class ChatViewHolder(private val binding: ItemMychatBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        // 아이템 정보 바인딩
+        // 채팅 정보 바인딩
         fun bind(message : MessageDTO) {
             binding.apply {
 

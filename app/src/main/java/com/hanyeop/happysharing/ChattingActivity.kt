@@ -53,7 +53,7 @@ class ChattingActivity : AppCompatActivity() {
             // 메시지 입력 시 리사이클러뷰 크기 조절
             messageRecyclerView.addOnLayoutChangeListener {
                     view, left, top, right, bottom, oldLeft, oldRight, oldTop, oldBottom ->
-                if (bottom<oldBottom){
+                if (bottom > oldBottom && ::chatAdapter.isInitialized){
                     messageRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
                 }
             }
