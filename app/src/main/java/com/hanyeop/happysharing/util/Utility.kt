@@ -10,15 +10,22 @@ class Utility {
             val currentTime = System.currentTimeMillis()
             var diffTime = (currentTime - time) / 60000
 
-            if(diffTime < 60){
-                return "$diffTime 분 전"
-            }
-            else if(diffTime/60 < 24){
-                return "${diffTime/60} 시간 전"
+            return when {
+                diffTime < 1 -> {
+                    "방금 전"
+                }
+                diffTime < 60 -> {
+                    "${diffTime}분 전"
+                }
+                diffTime/60 < 24 -> {
+                    "${diffTime/60}시간 전"
+                }
+                else -> {
+                    val simpleDataFormat = SimpleDateFormat("yyyy-MM-dd")
+                    simpleDataFormat.format(time)
+                }
             }
 
-            val simpleDataFormat = SimpleDateFormat("yyyy-MM-dd")
-            return simpleDataFormat.format(time)
         }
     }
 }
