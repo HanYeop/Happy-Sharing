@@ -50,6 +50,14 @@ class ChattingActivity : AppCompatActivity() {
                 sendButton.isEnabled = text.toString() != ""
             }
 
+            // 메시지 입력 시 리사이클러뷰 크기 조절
+            messageRecyclerView.addOnLayoutChangeListener {
+                    view, left, top, right, bottom, oldLeft, oldRight, oldTop, oldBottom ->
+                if (bottom<oldBottom){
+                    messageRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
+                }
+            }
+
             // 유저 정보 불러옴
             fireStore.collection("users").document(otherUId).get()
                 .addOnCompleteListener { documentSnapshot->
@@ -62,7 +70,7 @@ class ChattingActivity : AppCompatActivity() {
 
                         // 채팅 맨 밑으로 스크롤
                         chatAdapter.check.observe(this@ChattingActivity){
-                            messageRecyclerView.smoothScrollToPosition(chatAdapter.itemCount)
+                            messageRecyclerView.scrollToPosition(chatAdapter.itemCount-1)
                         }
                     }
                 }
