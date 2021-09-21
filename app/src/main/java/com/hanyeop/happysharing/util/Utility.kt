@@ -25,7 +25,11 @@ class Utility {
                     simpleDataFormat.format(time)
                 }
             }
+        }
 
+        fun chatTimeConverter(time: Long) :String{
+            val simpleDataFormat = SimpleDateFormat("MM-dd HH:mm")
+            return simpleDataFormat.format(time)
         }
     }
 }

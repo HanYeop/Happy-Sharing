@@ -89,7 +89,7 @@ class DetailActivity : AppCompatActivity() {
             // 채팅하기
             chatButton.setOnClickListener {
                 val intent = Intent(this@DetailActivity,ChattingActivity::class.java)
-                intent.putExtra("itemDTO",item)
+                intent.putExtra("otherUid",item.uId)
                 startActivity(intent)
             }
         }

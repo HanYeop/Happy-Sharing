@@ -11,7 +11,9 @@
         android:theme="@style/Theme.HappySharing">
         <activity
             android:name=".ChattingActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DetailActivity"
             android:exported="true"

@@ -13,6 +13,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -84,12 +87,20 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
     // 로그아웃
     private fun signOut(){
-        val intent = Intent(context, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        ActivityCompat.finishAffinity(requireActivity())
-        startActivity(intent)
-        auth?.signOut()
-        Toast.makeText(requireContext(), "로그아웃됨", Toast.LENGTH_SHORT).show()
+        auth?.signOut() // 로컬 로그아웃
+        // 구글 클라이언트 로그아웃
+        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(requireActivity(),gso)
+        googleSignInClient.signOut().addOnCompleteListener {
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            ActivityCompat.finishAffinity(requireActivity())
+            startActivity(intent)
+            Toast.makeText(requireContext(), "로그아웃됨", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // 프로필 편집

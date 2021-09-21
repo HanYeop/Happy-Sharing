@@ -22,7 +22,6 @@ class ChattingActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityChattingBinding
     private var uId : String? = null
-    private var otherUId : String? = null
 
     // Firestore 초기화
     private val fireStore = FirebaseFirestore.getInstance()
@@ -40,12 +39,9 @@ class ChattingActivity : AppCompatActivity() {
         binding = ActivityChattingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 아이템 불러오기
-        val item = intent.getParcelableExtra<ItemDTO>("itemDTO")
-
         // uid 불러오기
         uId = FirebaseAuth.getInstance().currentUser?.uid
-        otherUId = item!!.uId
+        val otherUId = intent.getStringExtra("otherUid").toString()
 
 
         binding.apply {
@@ -55,7 +51,7 @@ class ChattingActivity : AppCompatActivity() {
             }
 
             // 유저 정보 불러옴
-            fireStore.collection("users").document(item.uId!!).get()
+            fireStore.collection("users").document(otherUId).get()
                 .addOnCompleteListener { documentSnapshot->
 
                     if(documentSnapshot.isSuccessful){
@@ -63,13 +59,18 @@ class ChattingActivity : AppCompatActivity() {
                         // 리사이클러뷰 어댑터 연결
                         chatAdapter = ChatAdapter(uId.toString(),userDTO!!)
                         messageRecyclerView.adapter = chatAdapter
+
+                        // 채팅 맨 밑으로 스크롤
+                        chatAdapter.check.observe(this@ChattingActivity){
+                            messageRecyclerView.smoothScrollToPosition(chatAdapter.itemCount)
+                        }
                     }
                 }
 
             // 메시지 전송
             sendButton.setOnClickListener {
                 val time = System.currentTimeMillis()
-                val message = MessageDTO(uId,item!!.uId,messageEditView.text.toString(),time)
+                val message = MessageDTO(uId,otherUId,messageEditView.text.toString(),time)
                 messageEditView.setText("")
 
                 firebaseViewModel.uploadChat(message)
