@@ -3,19 +3,19 @@ package com.hanyeop.happysharing
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.navArgs
-import com.hanyeop.happysharing.adapter.ListAdapter
+import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.adapter.SearchAdapter
-import com.hanyeop.happysharing.databinding.ActivitySearchBinding
+import com.hanyeop.happysharing.databinding.ActivityMyItemBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
+import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
-class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
+class MyItemActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener  {
 
-    private lateinit var binding : ActivitySearchBinding
-
-    private val args by navArgs<SearchActivityArgs>()
+    private lateinit var binding : ActivityMyItemBinding
+    private var uId : String? = null
 
     // ListAdapter 선언
     private lateinit var listAdapter: SearchAdapter
@@ -23,15 +23,16 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val query = args.query
-
         // 뷰바인딩
-        binding = ActivitySearchBinding.inflate(layoutInflater)
+        binding = ActivityMyItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // uid 불러오기
+        uId = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         binding.apply {
             // 리사이클러뷰 어댑터 연결
-            listAdapter = SearchAdapter(this@SearchActivity,query,Constants.SEARCH)
+            listAdapter = SearchAdapter(this@MyItemActivity,uId!!,Constants.MY_ITEM)
             recyclerView.adapter = listAdapter
 
             finishButton.setOnClickListener {

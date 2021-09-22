@@ -26,7 +26,14 @@
         android:id="@+id/moreFragment"
         android:name="com.hanyeop.happysharing.fragment.MoreFragment"
         android:label="fragment_more"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more" >
+        <action
+            android:id="@+id/action_moreFragment_to_quizActivity"
+            app:destination="@id/quizActivity" />
+        <action
+            android:id="@+id/action_moreFragment_to_myItemActivity"
+            app:destination="@id/myItemActivity" />
+    </fragment>
     <fragment
         android:id="@+id/rankingFragment"
         android:name="com.hanyeop.happysharing.fragment.RankingFragment"
@@ -53,4 +60,14 @@
             android:name="query"
             app:argType="string" />
     </activity>
+    <activity
+        android:id="@+id/quizActivity"
+        android:name="com.hanyeop.happysharing.QuizActivity"
+        android:label="activity_quiz"
+        tools:layout="@layout/activity_quiz" />
+    <activity
+        android:id="@+id/myItemActivity"
+        android:name="com.hanyeop.happysharing.MyItemActivity"
+        android:label="activity_my_item"
+        tools:layout="@layout/activity_my_item" />
 </navigation>

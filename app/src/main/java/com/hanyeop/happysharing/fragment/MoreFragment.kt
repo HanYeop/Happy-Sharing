@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -69,6 +70,18 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
             // 프로필 버튼
             profileButton.setOnClickListener {
                 profileEdit()
+            }
+
+            // 퀴즈 버튼
+            quizButton.setOnClickListener {
+                val action = MoreFragmentDirections.actionMoreFragmentToQuizActivity()
+                findNavController().navigate(action)
+            }
+
+            // 내 글 버튼
+            myItemButton.setOnClickListener {
+                val action = MoreFragmentDirections.actionMoreFragmentToMyItemActivity()
+                findNavController().navigate(action)
             }
         }
 

@@ -14,10 +14,11 @@ import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
+import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.util.Utility
 
-class SearchAdapter(private val listener : OnItemClickListener,query: String)
+class SearchAdapter(private val listener : OnItemClickListener,query: String,type :Int)
     : RecyclerView.Adapter<SearchAdapter.ListViewHolder>() {
 
     private var itemList: ArrayList<ItemDTO> = arrayListOf()
@@ -26,22 +27,47 @@ class SearchAdapter(private val listener : OnItemClickListener,query: String)
     private val fireStore = FirebaseFirestore.getInstance()
 
     init {
-        // 아이템 리스트 불러오기
-        fireStore.collection("item").orderBy("timestamp",
-            Query.Direction.DESCENDING).get().addOnCompleteListener { documentSnapshot ->
-            itemList.clear() // 리스트 초기화
+        // 검색 일 때
+        if(type == Constants.SEARCH) {
+            // 아이템 리스트 불러오기
+            fireStore.collection("item").orderBy(
+                "timestamp",
+                Query.Direction.DESCENDING
+            ).get().addOnCompleteListener { documentSnapshot ->
+                itemList.clear() // 리스트 초기화
 
-            if (documentSnapshot.isSuccessful) {
-                // 리스트 불러오기
-                for(snapshot in documentSnapshot.result){
-                    if(snapshot.getString("title")!!.contains(query)) {
+                if (documentSnapshot.isSuccessful) {
+                    // 리스트 불러오기
+                    for (snapshot in documentSnapshot.result) {
+                        if (snapshot.getString("title")!!.contains(query)) {
+                            var item = snapshot.toObject(ItemDTO::class.java)
+                            itemList.add(item)
+                        }
+                    }
+                }
+                notifyDataSetChanged()
+            }
+        }
+
+        // 내 글 목록 일때
+        else if(type == Constants.MY_ITEM){
+            // 아이템 리스트 불러오기
+            Log.d(TAG, "$query: ")
+            fireStore.collection("item")
+                .whereEqualTo("uid",query)
+                .get().addOnCompleteListener { documentSnapshot ->
+                itemList.clear() // 리스트 초기화
+
+                if (documentSnapshot.isSuccessful) {
+                    // 리스트 불러오기
+                    for (snapshot in documentSnapshot.result) {
                         var item = snapshot.toObject(ItemDTO::class.java)
                         itemList.add(item)
                         Log.d(TAG, "$item: ")
                     }
                 }
+                notifyDataSetChanged()
             }
-        notifyDataSetChanged()
         }
     }
 

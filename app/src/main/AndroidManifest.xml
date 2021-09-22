@@ -10,8 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappySharing" >
         <activity
+            android:name=".QuizActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MyItemActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SearchActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChattingActivity"
             android:exported="true"

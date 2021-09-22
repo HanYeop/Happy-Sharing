@@ -114,42 +114,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="프로필 편집"
-                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_baseline_edit_24"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/quizButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="TextView"
+                android:text="랜덤 퀴즈"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_baseline_lightbulb_24"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/myItemButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="TextView"
+                android:text="내 글 보기"
+                android:drawableLeft="@drawable/ic_baseline_shopping_basket_24"
+                android:drawablePadding="10dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -157,7 +152,7 @@
                 android:id="@+id/singOutButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="로그아웃"
