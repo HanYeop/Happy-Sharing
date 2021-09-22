@@ -96,6 +96,16 @@
                             android:text="나눔"
                             android:textColor="@color/black" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/areaText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="지역"
+                        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                        app:layout_constraintEnd_toEndOf="@+id/userIdText"
+                        app:layout_constraintTop_toBottomOf="@+id/userIdText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

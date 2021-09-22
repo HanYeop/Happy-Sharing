@@ -57,7 +57,7 @@ class UploadActivity : AppCompatActivity() {
         firebaseViewModel.profileLoad(uId!!)
         firebaseViewModel.userDTO.observe(this,{
             itemDTO.uId = it.uId
-            binding.areaText.text = it.area.toString()
+            binding.areaText.setText(it.area)
         })
 
         // 다이얼로그 초기화

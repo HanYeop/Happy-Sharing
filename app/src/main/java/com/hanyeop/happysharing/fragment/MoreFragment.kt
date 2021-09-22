@@ -82,6 +82,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
                 userIdText.text = it.userId
                 scoreNumberText.text = it.score.toString()
                 shareNumberText.text = it.sharing.toString()
+                areaText.text = it.area
                 Glide.with(requireActivity()).load(it.imageUri)
                     .placeholder(R.drawable.ic_baseline_person_24)
                     .apply(RequestOptions().circleCrop()).into(userImageView)
