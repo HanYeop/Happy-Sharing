@@ -32,6 +32,10 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
             // 리사이클러뷰 어댑터 연결
             listAdapter = SearchAdapter(this@SearchActivity,query)
             recyclerView.adapter = listAdapter
+
+            finishButton.setOnClickListener {
+                finish()
+            }
         }
     }
 
