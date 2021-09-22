@@ -48,9 +48,18 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // args 불러오기
-        item = args.itemDTO
-        user = args.userDTO
+        val itemDTO = intent.getParcelableExtra<ItemDTO>("itemDTO")
+        val userDTO = intent.getParcelableExtra<UserDTO>("userDTO")
+
+        if(itemDTO != null){
+            item = itemDTO
+            user = userDTO!!
+        }
+        else{
+            // args 불러오기
+            item = args.itemDTO
+            user = args.userDTO
+        }
 
         // 현재 uid
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -112,19 +121,7 @@ class DetailActivity : AppCompatActivity() {
                         Toast.makeText(this@DetailActivity, "이미 양도가 완료된 물건입니다.", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        // 점수 올려주기
-                        val userDTO =
-                            UserDTO(user.uId,user.userId,user.imageUri,user.score+10,user.sharing+1,user.area)
-                        firebaseViewModel.profileEdit(userDTO)
-
-                        // 완료 처리하기
-                        val itemDTO =
-                            ItemDTO(item.uId,item.imageUri,item.title,item.content,item.timestamp,item.category,
-                            item.area,true)
-                        firebaseViewModel.uploadItem(itemDTO)
-
-                        Toast.makeText(this@DetailActivity, "양도가 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                        finish()
+                        completedDialog(this@DetailActivity).show()
                     }
                 }
 
@@ -170,5 +167,31 @@ class DetailActivity : AppCompatActivity() {
         deleteDialog.setNegativeButton("아니오") { _, _ ->
         }
         return deleteDialog
+    }
+
+    // 양도 다이얼로그
+    private fun completedDialog(context : Context) : AlertDialog.Builder{
+        val completedDialog = AlertDialog.Builder(this@DetailActivity)
+        // TODO 아이콘 설정
+        completedDialog.setTitle("양도 완료").setMessage("양도 완료 처리할까요? 양도가 완료되면 10 포인트를 얻습니다.")
+            .setIcon(R.drawable.ic_baseline_shopping_basket_24)
+        completedDialog.setPositiveButton("예") { _, _ ->
+            // 점수 올려주기
+            val userDTO =
+                UserDTO(user.uId,user.userId,user.imageUri,user.score+10,user.sharing+1,user.area)
+            firebaseViewModel.profileEdit(userDTO)
+
+            // 완료 처리하기
+            val itemDTO =
+                ItemDTO(item.uId,item.imageUri,item.title,item.content,item.timestamp,item.category,
+                    item.area,true)
+            firebaseViewModel.uploadItem(itemDTO)
+
+            Toast.makeText(this@DetailActivity, "양도가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        completedDialog.setNegativeButton("아니오") { _, _ ->
+        }
+        return completedDialog
     }
 }

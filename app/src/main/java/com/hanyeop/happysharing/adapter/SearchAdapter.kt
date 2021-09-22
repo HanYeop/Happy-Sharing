@@ -1,6 +1,5 @@
 package com.hanyeop.happysharing.adapter
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,37 +14,34 @@ import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants
+import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.util.Utility
 
-class ListAdapter(private val listener : OnItemClickListener)
-    : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class SearchAdapter(private val listener : OnItemClickListener,query: String)
+    : RecyclerView.Adapter<SearchAdapter.ListViewHolder>() {
 
     private var itemList: ArrayList<ItemDTO> = arrayListOf()
 
     // Firestore 초기화
     private val fireStore = FirebaseFirestore.getInstance()
-    private var isFirst = true // 처음 실행여부 ( 한번도 실행되지 않음 = true )
 
     init {
         // 아이템 리스트 불러오기
         fireStore.collection("item").orderBy("timestamp",
-            Query.Direction.DESCENDING).addSnapshotListener { querySnapshot, _ ->
+            Query.Direction.DESCENDING).get().addOnCompleteListener { documentSnapshot ->
             itemList.clear() // 리스트 초기화
 
-            if(querySnapshot == null) return@addSnapshotListener
-
-            // 리스트 불러오기
-            for(snapshot in querySnapshot.documents){
-                var item = snapshot.toObject(ItemDTO::class.java)
-                itemList.add(item!!)
+            if (documentSnapshot.isSuccessful) {
+                // 리스트 불러오기
+                for(snapshot in documentSnapshot.result){
+                    if(snapshot.getString("title")!!.contains(query)) {
+                        var item = snapshot.toObject(ItemDTO::class.java)
+                        itemList.add(item)
+                        Log.d(TAG, "$item: ")
+                    }
+                }
             }
-
-            // 최초 실행 시 리스트 갱신
-            if(isFirst){
-                notifyDataSetChanged()
-                isFirst = false
-            }
+        notifyDataSetChanged()
         }
     }
 
@@ -105,8 +101,8 @@ class ListAdapter(private val listener : OnItemClickListener)
                             uiShow(binding)
 
                             // 아이템 클릭 시
-                           root.setOnClickListener {
-                               listener.onItemClick(item,userDTO)
+                            root.setOnClickListener {
+                                listener.onItemClick(item,userDTO)
                             }
                         }
                     }
@@ -135,7 +131,7 @@ class ListAdapter(private val listener : OnItemClickListener)
         fun onItemClick(itemDTO: ItemDTO, userDTO: UserDTO)
     }
 
-    private fun uiHide(binding :ItemObjectBinding){
+    private fun uiHide(binding : ItemObjectBinding){
         binding.userText.visibility = View.GONE
         binding.scoreNumberText.visibility = View.GONE
         binding.scoreText.visibility = View.GONE
@@ -150,7 +146,7 @@ class ListAdapter(private val listener : OnItemClickListener)
         binding.progressBar.visibility = View.VISIBLE
     }
 
-    private fun uiShow(binding :ItemObjectBinding){
+    private fun uiShow(binding : ItemObjectBinding){
         binding.userText.visibility = View.VISIBLE
         binding.scoreNumberText.visibility = View.VISIBLE
         binding.scoreText.visibility = View.VISIBLE

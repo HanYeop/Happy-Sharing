@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_listFragment_to_searchActivity"
+            app:destination="@id/searchActivity" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -40,5 +43,14 @@
     <argument
         android:name="userDTO"
         app:argType="com.hanyeop.happysharing.model.UserDTO" />
+    </activity>
+    <activity
+        android:id="@+id/searchActivity"
+        android:name="com.hanyeop.happysharing.SearchActivity"
+        android:label="activity_search"
+        tools:layout="@layout/activity_search" >
+        <argument
+            android:name="query"
+            app:argType="string" />
     </activity>
 </navigation>

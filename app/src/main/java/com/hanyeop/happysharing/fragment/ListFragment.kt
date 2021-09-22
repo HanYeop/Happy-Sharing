@@ -20,6 +20,9 @@ import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import android.R.menu
+import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 
 
 class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickListener {
@@ -44,11 +47,12 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         val toolbar : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.title = "나눔 목록"
 
+        // 프래그먼트 툴바 버튼 생성
+        setHasOptionsMenu(true)
+
         // 프로필 불러오기 (없으면 생성)
         val uId = FirebaseAuth.getInstance().currentUser?.uid
         firebaseViewModel.profileLoad(uId!!)
-
-//        setHasOptionsMenu(true)
 
         binding.apply {
             // 리사이클러뷰 어댑터 연결
@@ -61,6 +65,33 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
                 pullToRefresh.isRefreshing = false
             }
         }
+    }
+
+    // 검색 버튼 생성
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater){
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.toolbar_menu, menu)
+
+        // 아이템 연결
+        val searchItem = menu.findItem(R.id.searchButton)
+        val searchView = searchItem.actionView as SearchView?
+
+        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            // 제출 버튼 눌렀을 때
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(query != null){
+                    val action = ListFragmentDirections.actionListFragmentToSearchActivity(query)
+                    findNavController().navigate(action)
+                    searchView.clearFocus() // 포커스 없애기 (커서 없애기)
+                }
+                return true
+            }
+
+            // 검색어 값 변경시
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     // 아이템 클릭 시 디테일 뷰로
@@ -80,10 +111,4 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         super.onResume()
         listAdapter.notifyDataSetChanged()
     }
-
-    //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//
-//        inflater.inflate(R.menu.menu_gallery,menu)
-//    }
 }

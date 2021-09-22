@@ -18,6 +18,7 @@
             android:layout_height="50dp"
             android:theme="?attr/actionBarTheme"
             android:paddingStart="20dp"
+            android:background="@color/sub_green"
             app:title="HappySharing" />
 
         <View
