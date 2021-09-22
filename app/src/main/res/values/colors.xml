@@ -12,5 +12,8 @@
     <color name="sub_green">#4D57CC99</color>
     <color name="background_color">#33D5EEBB</color>
     <color name="grey">#80C8C6C6</color>
+    <color name="item_grey">#C8C6C6</color>
+    <color name="red">#FF2442</color>
+    <color name="blue">#3DB2FF</color>
 
 </resources>

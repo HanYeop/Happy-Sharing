@@ -1,9 +1,12 @@
 package com.hanyeop.happysharing.adapter
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -73,6 +76,17 @@ class ListAdapter(private val listener : OnItemClickListener)
                                 .load(item.imageUri)
                                 .placeholder(R.color.grey)
                                 .into(imageView)
+
+                            // 양도 완료된 상품
+                            if(item.completed) {
+                                cardView.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            this.root.context,
+                                            R.color.item_grey
+                                        )
+                                    )
+                            }
 
                             // 보여줄 준비가 되면
                             uiShow(binding)

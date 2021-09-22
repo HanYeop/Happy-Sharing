@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color.red
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -72,6 +73,15 @@ class DetailActivity : AppCompatActivity() {
             areaText.text = item.area
             contentText.text = item.content
 
+            if(item.completed) {
+                completedText.text = "양도 완료"
+                completedText.setTextColor(resources.getColor(R.color.red))
+            }
+            else{
+                completedText.text = "양도 가능"
+                completedText.setTextColor(resources.getColor(R.color.blue))
+            }
+
             // 유저 정보 표시
             Glide.with(this@DetailActivity)
                 .load(user.imageUri)
@@ -84,7 +94,7 @@ class DetailActivity : AppCompatActivity() {
             // 내 글일 때만 삭제,완료 가능
             if(item.uId == uid){
                 deleteButton.visibility = View.VISIBLE
-                chatButton.text = "양도완료"
+                chatButton.text = "양도 완료하기"
             }
             else{
                 deleteButton.visibility = View.GONE
@@ -96,9 +106,26 @@ class DetailActivity : AppCompatActivity() {
             }
 
             chatButton.setOnClickListener {
-                // 양도완료
+                // 양도완료 버튼
                 if(item.uId == uid){
+                    if(item.completed){
+                        Toast.makeText(this@DetailActivity, "이미 양도가 완료된 물건입니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        // 점수 올려주기
+                        val userDTO =
+                            UserDTO(user.uId,user.userId,user.imageUri,user.score+10,user.sharing+1,user.area)
+                        firebaseViewModel.profileEdit(userDTO)
 
+                        // 완료 처리하기
+                        val itemDTO =
+                            ItemDTO(item.uId,item.imageUri,item.title,item.content,item.timestamp,item.category,
+                            item.area,true)
+                        firebaseViewModel.uploadItem(itemDTO)
+
+                        Toast.makeText(this@DetailActivity, "양도가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                 }
 
                 // 채팅하기
