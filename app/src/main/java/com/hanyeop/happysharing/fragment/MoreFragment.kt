@@ -56,6 +56,10 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         auth = FirebaseAuth.getInstance()
         uId = FirebaseAuth.getInstance().currentUser?.uid
 
+        // 툴바 텍스트 변경
+        val toolbar : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbar.title = "더 보기"
+
         binding.apply {
             // 로그아웃 버튼
             singOutButton.setOnClickListener {

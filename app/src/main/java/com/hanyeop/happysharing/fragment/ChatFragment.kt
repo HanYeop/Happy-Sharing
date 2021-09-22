@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.ChattingActivity
 import com.hanyeop.happysharing.R
@@ -31,10 +32,15 @@ class ChatFragment : Fragment(R.layout.fragment_chat), ChatListAdapter.OnChatCli
         // uid 불러오기
         uId = FirebaseAuth.getInstance().currentUser?.uid
 
+        // 툴바 텍스트 변경
+        val toolbar : androidx.appcompat.widget.Toolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbar.title = "대화 목록"
+
         binding.apply {
             // 리사이클러뷰 어댑터 연결
             chatListAdapter = ChatListAdapter(uId.toString(),this@ChatFragment)
             chatListRecyclerView.adapter = chatListAdapter
+            chatListRecyclerView.addItemDecoration(DividerItemDecoration(view.context,1))
         }
     }
 
