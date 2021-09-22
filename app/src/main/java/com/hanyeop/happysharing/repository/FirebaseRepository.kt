@@ -29,7 +29,7 @@ class FirebaseRepository() {
 
                 else if(userDTO?.userId == null){
                     Log.d(TAG, "아이디가 존재하지 않음")
-                    val newUserDTO = UserDTO(uid,"사용자","default",0,0)
+                    val newUserDTO = UserDTO(uid,"사용자","default",0,0,"지역")
                     fireStore.collection("users").document(uid).set(newUserDTO)
                 }
             }

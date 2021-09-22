@@ -60,6 +60,7 @@ class ProfileActivity : AppCompatActivity() {
                 Glide.with(this@ProfileActivity).load(it.imageUri)
                     .placeholder(R.drawable.ic_baseline_person_24)
                     .apply(RequestOptions().circleCrop()).into(profileImageView)
+                areaEditView.setText(it.area.toString())
             }
         })
 
@@ -92,6 +93,7 @@ class ProfileActivity : AppCompatActivity() {
             // 확인 버튼
             okButton.setOnClickListener {
                 userDTO.userId = userIdEditView.text.toString() // 입력한 닉네임으로 변경
+                userDTO.area = areaEditView.text.toString() // 입력한 지역으로 변경
 
                 when {
                     // 프로필 이미지 초기화 했을 때

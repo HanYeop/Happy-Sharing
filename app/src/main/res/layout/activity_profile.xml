@@ -35,6 +35,33 @@
             android:hint="닉네임" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/areaInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/areaEditView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/editview_border"
+            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+            android:drawablePadding="10dp"
+            android:hint="지역"
+            android:inputType="text"
+            android:maxLength="10"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="300dp"

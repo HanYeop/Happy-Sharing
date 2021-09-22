@@ -69,11 +69,13 @@
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <EditText
+    <TextView
         android:id="@+id/areaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전주시 덕진구"
+        android:gravity="right"
+        android:text="지역명"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
