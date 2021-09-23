@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HappySharing</string>
+    <string name="app_name">Happy Sharing</string>
 
     <string-array name="category">
         <item>카테고리</item>

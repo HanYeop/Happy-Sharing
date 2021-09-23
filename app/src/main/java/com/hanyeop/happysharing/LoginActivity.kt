@@ -42,12 +42,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.apply {
 
-            // 다음화면 넘어가기 (테스트용)
-            signinButton.setOnClickListener{
-                val intent = Intent(this@LoginActivity,MainActivity::class.java)
-                startActivity(intent)
-            }
-
             // 구글 로그인 버튼
             googleSigninButton.setOnClickListener {
                 googleLogin()
