@@ -64,7 +64,11 @@
         android:id="@+id/quizActivity"
         android:name="com.hanyeop.happysharing.QuizActivity"
         android:label="activity_quiz"
-        tools:layout="@layout/activity_quiz" />
+        tools:layout="@layout/activity_quiz" >
+        <argument
+            android:name="userDTO"
+            app:argType="com.hanyeop.happysharing.model.UserDTO" />
+    </activity>
     <activity
         android:id="@+id/myItemActivity"
         android:name="com.hanyeop.happysharing.MyItemActivity"

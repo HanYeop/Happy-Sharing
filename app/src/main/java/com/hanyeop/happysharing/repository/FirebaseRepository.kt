@@ -3,15 +3,13 @@ package com.hanyeop.happysharing.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.hanyeop.happysharing.model.ChatListDTO
-import com.hanyeop.happysharing.model.ItemDTO
-import com.hanyeop.happysharing.model.MessageDTO
-import com.hanyeop.happysharing.model.UserDTO
+import com.hanyeop.happysharing.model.*
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
 class FirebaseRepository() {
 
     val userDTO = MutableLiveData<UserDTO>() // 유저 정보
+    val currentQuiz = MutableLiveData<QuizDTO>() // 퀴즈 정보
 
     // Firestore 초기화
     private val fireStore = FirebaseFirestore.getInstance()
@@ -81,5 +79,20 @@ class FirebaseRepository() {
 
         fireStore.collection("chatList")
             .document(name).set(chatList)
+    }
+
+    // 퀴즈 불러오기
+    fun quizLoad(num: Int) {
+        fireStore.collection("quiz").whereEqualTo("quizNumber", num)
+            .get().addOnCompleteListener { documentSnapshot ->
+
+                if (documentSnapshot.isSuccessful) {
+                    // 리스트 불러오기
+                    for (snapshot in documentSnapshot.result) {
+                        var quiz = snapshot.toObject(QuizDTO::class.java)
+                        currentQuiz.value = quiz
+                    }
+                }
+            }
     }
 }

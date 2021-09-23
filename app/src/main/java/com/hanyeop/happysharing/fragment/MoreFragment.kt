@@ -42,6 +42,9 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
     private var auth : FirebaseAuth? = null
     private var uId : String? = null
 
+    // 현재 유저
+    private var curUser = UserDTO()
+
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
 
@@ -74,7 +77,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
             // 퀴즈 버튼
             quizButton.setOnClickListener {
-                val action = MoreFragmentDirections.actionMoreFragmentToQuizActivity()
+                val action = MoreFragmentDirections.actionMoreFragmentToQuizActivity(curUser)
                 findNavController().navigate(action)
             }
 
@@ -92,6 +95,8 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
         firebaseViewModel.userDTO.observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: 유저 정보 동기화됨")
             binding.apply {
+                curUser = it
+
                 userIdText.text = it.userId
                 scoreNumberText.text = it.score.toString()
                 shareNumberText.text = it.sharing.toString()
