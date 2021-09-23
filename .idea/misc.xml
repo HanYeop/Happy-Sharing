@@ -19,8 +19,10 @@
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" value="0.38229166666666664" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/ic_baseline_title_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/main_icon_foreground.xml" value="0.3764102564102564" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/rounded_corner.xml" value="0.378125" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/rounded_corner_border.xml" value="0.38229166666666664" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/splash.xml" value="0.3764102564102564" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/drawable/textview_border.xml" value="0.3764102564102564" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_chatting.xml" value="0.264" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/layout/activity_detail.xml" value="0.4" />
@@ -46,7 +48,10 @@
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/menu_gallery.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/menu_item.xml" value="0.3605128205128205" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/menu/toolbar_menu.xml" value="0.4" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3764102564102564" />
         <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3764102564102564" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/mipmap-anydpi-v26/main_icon.xml" value="0.3764102564102564" />
+        <entry key="..\:/AndroidProject/HappySharing/app/src/main/res/mipmap-anydpi-v26/main_icon_round.xml" value="0.3764102564102564" />
       </map>
     </option>
   </component>

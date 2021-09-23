@@ -157,7 +157,6 @@ class DetailActivity : AppCompatActivity() {
     // 삭제 다이얼로그
     private fun deleteDialog(context : Context) : AlertDialog.Builder{
         val deleteDialog = AlertDialog.Builder(this@DetailActivity)
-        // TODO 아이콘 설정
         deleteDialog.setTitle("글 삭제").setMessage("글을 삭제할까요? 삭제한 내용은 복구할 수 없습니다.")
             .setIcon(R.drawable.ic_baseline_shopping_basket_24)
         deleteDialog.setPositiveButton("예") { _, _ ->
@@ -172,7 +171,6 @@ class DetailActivity : AppCompatActivity() {
     // 양도 다이얼로그
     private fun completedDialog(context : Context) : AlertDialog.Builder{
         val completedDialog = AlertDialog.Builder(this@DetailActivity)
-        // TODO 아이콘 설정
         completedDialog.setTitle("양도 완료").setMessage("양도 완료 처리할까요? 양도가 완료되면 10 포인트를 얻습니다.")
             .setIcon(R.drawable.ic_baseline_shopping_basket_24)
         completedDialog.setPositiveButton("예") { _, _ ->
