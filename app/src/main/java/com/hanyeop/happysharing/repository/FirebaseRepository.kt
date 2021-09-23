@@ -3,6 +3,7 @@ package com.hanyeop.happysharing.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.hanyeop.happysharing.model.*
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
@@ -16,21 +17,52 @@ class FirebaseRepository() {
 
     // 프로필 불러오기
     fun profileLoad(uid : String) {
-        fireStore.collection("users").document(uid)
-            .addSnapshotListener { documentSnapshot, _ ->
-                if (documentSnapshot == null) return@addSnapshotListener
-
-                val userDTO = documentSnapshot.toObject(UserDTO::class.java)
-                if (userDTO?.userId != null) {
-                    this.userDTO.value = userDTO!!
-                }
-
-                else if(userDTO?.userId == null){
-                    Log.d(TAG, "아이디가 존재하지 않음")
-                    val newUserDTO = UserDTO(uid,"사용자","default",0,0,"지역")
-                    fireStore.collection("users").document(uid).set(newUserDTO)
-                }
+        // FCM 불러오기
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task->
+            // 실패
+            if (!task.isSuccessful) {
+                Log.d(TAG, "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
             }
+            // 받아온 새로운 토큰
+            val token = task.result
+
+            // 프로필 불러오기
+            fireStore.collection("users").document(uid)
+                .addSnapshotListener { documentSnapshot, _ ->
+                    if (documentSnapshot == null) return@addSnapshotListener
+
+                    val userDTO = documentSnapshot.toObject(UserDTO::class.java)
+                    if (userDTO?.userId != null) {
+
+                        // 토큰이 변경되었을 경우 갱신
+                        if(userDTO.token != token){
+                            Log.d(TAG, "profileLoad: 토큰 변경되었음.")
+                            val newUserDTO = UserDTO(userDTO.uId,userDTO.userId,
+                                userDTO.imageUri,userDTO.score,userDTO.sharing,userDTO.area,token)
+                            fireStore.collection("users").document(uid).set(newUserDTO)
+
+                            // 유저정보 라이브데이터 변경하기
+                            this.userDTO.value = newUserDTO
+                        }
+
+                        // 아니면 그냥 불러옴
+                        else {
+                            Log.d(TAG, "profileLoad: 이미 동일한 토큰이 존재함.")
+                            this.userDTO.value = userDTO!!
+                        }
+                    }
+
+                    // 아이디 최초 생성 시
+                    else if(userDTO?.userId == null){
+                        Log.d(TAG, "아이디가 존재하지 않음")
+                        val newUserDTO = UserDTO(uid,"사용자","default",0,0,"지역",token)
+                        fireStore.collection("users").document(uid).set(newUserDTO)
+
+                        this.userDTO.value = newUserDTO
+                    }
+                }
+        }
     }
 
     // 프로필 수정하기

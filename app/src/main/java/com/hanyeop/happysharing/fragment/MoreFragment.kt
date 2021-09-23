@@ -122,7 +122,7 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             ActivityCompat.finishAffinity(requireActivity())
             startActivity(intent)
-            Toast.makeText(requireContext(), "로그아웃됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 

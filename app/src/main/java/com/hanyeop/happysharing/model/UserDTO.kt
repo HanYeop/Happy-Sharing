@@ -10,5 +10,6 @@ data class UserDTO(
         var imageUri : String? = null,
         var score : Int = 0,
         var sharing : Int = 0,
-        var area : String? = null
+        var area : String? = null,
+        var token : String? = null
 ) : Parcelable

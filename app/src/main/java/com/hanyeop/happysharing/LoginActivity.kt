@@ -86,10 +86,9 @@ class LoginActivity : AppCompatActivity() {
             if(result.isSuccess) {
                 var accout = result.signInAccount
                 firebaseAuthWithGoogle(accout)
-                Toast.makeText(this,"성공",Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this,"실패",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show()
             }
         }
     }
