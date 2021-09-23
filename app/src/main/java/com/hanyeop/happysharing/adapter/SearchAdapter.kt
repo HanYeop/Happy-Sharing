@@ -52,7 +52,6 @@ class SearchAdapter(private val listener : OnItemClickListener,query: String,typ
         // 내 글 목록 일때
         else if(type == Constants.MY_ITEM){
             // 아이템 리스트 불러오기
-            Log.d(TAG, "$query: ")
             fireStore.collection("item")
                 .whereEqualTo("uid",query)
                 .get().addOnCompleteListener { documentSnapshot ->
@@ -68,6 +67,25 @@ class SearchAdapter(private val listener : OnItemClickListener,query: String,typ
                 }
                 notifyDataSetChanged()
             }
+        }
+
+        // 카테고리별 조회 일 때
+        else if(type == Constants.CATEGORY){
+            fireStore.collection("item")
+                .whereEqualTo("category",query)
+                .get().addOnCompleteListener { documentSnapshot ->
+                    itemList.clear() // 리스트 초기화
+
+                    if (documentSnapshot.isSuccessful) {
+                        // 리스트 불러오기
+                        for (snapshot in documentSnapshot.result) {
+                            var item = snapshot.toObject(ItemDTO::class.java)
+                            itemList.add(item)
+                            Log.d(TAG, "$item: ")
+                        }
+                    }
+                    notifyDataSetChanged()
+                }
         }
     }
 

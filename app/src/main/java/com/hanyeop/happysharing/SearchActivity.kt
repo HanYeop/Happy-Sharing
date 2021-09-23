@@ -24,6 +24,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
         super.onCreate(savedInstanceState)
 
         val query = args.query
+        val type = args.type
 
         // 뷰바인딩
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -31,7 +32,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
 
         binding.apply {
             // 리사이클러뷰 어댑터 연결
-            listAdapter = SearchAdapter(this@SearchActivity,query,Constants.SEARCH)
+            listAdapter = SearchAdapter(this@SearchActivity,query,type)
             recyclerView.adapter = listAdapter
 
             finishButton.setOnClickListener {

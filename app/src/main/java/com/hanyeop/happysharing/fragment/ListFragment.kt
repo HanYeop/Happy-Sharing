@@ -21,11 +21,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.R.menu
+import android.app.Dialog
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import com.hanyeop.happysharing.dialog.CategoryDialog
+import com.hanyeop.happysharing.dialog.LoadingDialog
+import com.hanyeop.happysharing.util.Constants
+import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
 
-class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickListener {
+class ListFragment : Fragment(R.layout.fragment_list)
+    , ListAdapter.OnItemClickListener, CategoryDialog.OnCategorySelectedListener {
 
     // 참조 관리
     private var _binding : FragmentListBinding? = null
@@ -36,6 +44,9 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
+
+    // 카테고리 다이얼로그
+    private lateinit var dialog : Dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +60,9 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
         // 프래그먼트 툴바 버튼 생성
         setHasOptionsMenu(true)
+
+        // 다이얼로그 초기화
+        dialog = CategoryDialog(requireContext(),this)
 
         // 프로필 불러오기 (없으면 생성)
         val uId = FirebaseAuth.getInstance().currentUser?.uid
@@ -80,7 +94,8 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
             // 제출 버튼 눌렀을 때
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query != null){
-                    val action = ListFragmentDirections.actionListFragmentToSearchActivity(query)
+                    val action
+                    = ListFragmentDirections.actionListFragmentToSearchActivity(query,Constants.SEARCH)
                     findNavController().navigate(action)
                     searchView.clearFocus() // 포커스 없애기 (커서 없애기)
                 }
@@ -94,9 +109,25 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.categoryButton ->{
+                dialog.show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     // 아이템 클릭 시 디테일 뷰로
     override fun onItemClick(itemDTO: ItemDTO,userDTO: UserDTO) {
         val action = ListFragmentDirections.actionListFragmentToDetailActivity(itemDTO,userDTO)
+        findNavController().navigate(action)
+    }
+
+    // 카테고리 선택 시
+    override fun onCategorySelected(category: String) {
+        val action
+                = ListFragmentDirections.actionListFragmentToSearchActivity(category,Constants.CATEGORY)
         findNavController().navigate(action)
     }
 

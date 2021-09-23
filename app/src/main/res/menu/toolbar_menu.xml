@@ -8,4 +8,10 @@
         android:enabled="true"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/categoryButton"
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="카테고리"
+        android:enabled="true"
+        app:showAsAction="ifRoom"/>
 </menu>

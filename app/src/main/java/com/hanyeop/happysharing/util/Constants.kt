@@ -13,5 +13,6 @@ class Constants {
 
         const val SEARCH = 0
         const val MY_ITEM = 1
+        const val CATEGORY = 2
     }
 }
