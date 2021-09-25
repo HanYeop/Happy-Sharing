@@ -77,7 +77,7 @@ class ListAdapter(private val listener : OnItemClickListener)
                                 .placeholder(R.color.grey)
                                 .into(imageView)
 
-                            // 양도 완료된 상품
+                            // 양도 완료된 상품 배경색깔
                             if(item.completed) {
                                 cardView.backgroundTintList =
                                     ColorStateList.valueOf(
@@ -86,10 +86,9 @@ class ListAdapter(private val listener : OnItemClickListener)
                                             R.color.item_grey
                                         )
                                     )
-                                completedText.visibility = View.VISIBLE
                             }
 
-                            // 완료되지 않은 상품
+                            // 완료되지 않은 상품 배경색깔
                             else{
                                 cardView.backgroundTintList =
                                     ColorStateList.valueOf(
@@ -98,11 +97,10 @@ class ListAdapter(private val listener : OnItemClickListener)
                                             R.color.white
                                         )
                                     )
-                                completedText.visibility = View.GONE
                             }
 
                             // 보여줄 준비가 되면
-                            uiShow(binding)
+                            uiShow(binding,item.completed)
 
                             // 아이템 클릭 시
                            root.setOnClickListener {
@@ -146,11 +144,13 @@ class ListAdapter(private val listener : OnItemClickListener)
         binding.dateText.visibility = View.GONE
         binding.areaText.visibility = View.GONE
         binding.imageView.visibility = View.GONE
+        binding.completedText.visibility = View.GONE
 
+        // 로딩바 보여주기
         binding.progressBar.visibility = View.VISIBLE
     }
 
-    private fun uiShow(binding :ItemObjectBinding){
+    private fun uiShow(binding :ItemObjectBinding, completed: Boolean){
         binding.userText.visibility = View.VISIBLE
         binding.scoreNumberText.visibility = View.VISIBLE
         binding.scoreText.visibility = View.VISIBLE
@@ -161,7 +161,9 @@ class ListAdapter(private val listener : OnItemClickListener)
         binding.dateText.visibility = View.VISIBLE
         binding.areaText.visibility = View.VISIBLE
         binding.imageView.visibility = View.VISIBLE
+        if(completed) binding.completedText.visibility = View.VISIBLE
 
+        // 로딩바 숨기기
         binding.progressBar.visibility = View.GONE
     }
 }
