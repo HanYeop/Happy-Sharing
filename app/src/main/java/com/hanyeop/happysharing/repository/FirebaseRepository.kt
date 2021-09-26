@@ -4,13 +4,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
+import com.hanyeop.happysharing.api.RetrofitInstance
 import com.hanyeop.happysharing.model.*
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 class FirebaseRepository() {
 
     val userDTO = MutableLiveData<UserDTO>() // 유저 정보
     val currentQuiz = MutableLiveData<QuizDTO>() // 퀴즈 정보
+    val myResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData() // 메세지 수신 정보
 
     // Firestore 초기화
     private val fireStore = FirebaseFirestore.getInstance()
@@ -82,12 +86,13 @@ class FirebaseRepository() {
 
     // 메시지 전송하기
     fun uploadChat(messageDTO: MessageDTO){
+
+        // 채팅 저장
         fireStore.collection("chat")
             .document(messageDTO.fromUid.toString())
             .collection(messageDTO.toUid.toString())
             .document(messageDTO.timestamp.toString())
             .set(messageDTO)
-
         fireStore.collection("chat")
             .document(messageDTO.toUid.toString())
             .collection(messageDTO.fromUid.toString())
@@ -103,12 +108,9 @@ class FirebaseRepository() {
         else if(messageDTO.fromUid.toString() > messageDTO.toUid.toString()){
             name = "${messageDTO.toUid}_${messageDTO.fromUid.toString()}"
         }
-
         val chatPerson = arrayListOf(messageDTO.fromUid.toString(),messageDTO.toUid.toString())
-
         val chatList = ChatListDTO(messageDTO.fromUid,messageDTO.toUid
             ,messageDTO.content,messageDTO.timestamp,chatPerson)
-
         fireStore.collection("chatList")
             .document(name).set(chatList)
     }
@@ -126,5 +128,10 @@ class FirebaseRepository() {
                     }
                 }
             }
+    }
+
+    // 푸시 메세지 전송
+    suspend fun sendNotification(notification: NotificationBody) {
+        myResponse.value = RetrofitInstance.api.sendNotification(notification)
     }
 }

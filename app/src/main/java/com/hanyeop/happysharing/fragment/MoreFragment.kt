@@ -27,6 +27,7 @@ import com.hanyeop.happysharing.ProfileActivity
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.FragmentListBinding
 import com.hanyeop.happysharing.databinding.FragmentMoreBinding
+import com.hanyeop.happysharing.model.NotificationBody
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.repository.FirebaseRepository
 import com.hanyeop.happysharing.util.Constants.Companion.TAG

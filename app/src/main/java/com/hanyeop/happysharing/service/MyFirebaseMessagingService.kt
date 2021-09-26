@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.hanyeop.happysharing.MainActivity
+import com.hanyeop.happysharing.R
 import java.lang.Exception
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -18,12 +19,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // 메세지가 수신되면 호출
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        if(remoteMessage.data.isNotEmpty()){
+
+        // 서버에서 직접 보냈을 때
+        if(remoteMessage.notification != null){
             sendNotification(remoteMessage.notification?.title,
                 remoteMessage.notification?.body!!)
         }
-        else{
 
+        // 다른 기기에서 서버로 보냈을 때
+        else if(remoteMessage.data.isNotEmpty()){
+            val title = remoteMessage.data["title"]
+            val message = remoteMessage.data["message"]
+            sendNotification(title,message!!)
         }
     }
 
@@ -59,6 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setContentTitle(title) // 제목
             .setContentText(body) // 내용
+            .setSmallIcon(R.drawable.ic_baseline_shopping_basket_24) // 아이콘
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)

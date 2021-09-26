@@ -20,5 +20,6 @@ class Constants {
         const val MY_ITEM = 1
         const val CATEGORY = 2
 
+        const val FCM_URL = "https://fcm.googleapis.com"
     }
 }

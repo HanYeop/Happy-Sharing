@@ -13,6 +13,7 @@ import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.ActivityChattingBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.MessageDTO
+import com.hanyeop.happysharing.model.NotificationBody
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.util.Utility
@@ -31,6 +32,9 @@ class ChattingActivity : AppCompatActivity() {
 
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
+
+    // 상대방 FCM 토큰
+    private var token : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +77,7 @@ class ChattingActivity : AppCompatActivity() {
                         messageRecyclerView.adapter = chatAdapter
 
                         userText.text = userDTO.userId
+                        token = userDTO.token // 토큰 받아오기
 
                         // 채팅 맨 밑으로 스크롤
                         chatAdapter.check.observe(this@ChattingActivity){
@@ -83,11 +88,24 @@ class ChattingActivity : AppCompatActivity() {
 
             // 메시지 전송
             sendButton.setOnClickListener {
+                // 메세지 세팅
                 val time = System.currentTimeMillis()
                 val message = MessageDTO(uId,otherUId,messageEditView.text.toString(),time)
-                messageEditView.setText("")
-
+                // 메세지 전송
                 firebaseViewModel.uploadChat(message)
+
+                // FCM 전송하기
+                val data = NotificationBody.NotificationData(getString(R.string.app_name)
+                    ,"userId",messageEditView.text.toString())
+                val body = NotificationBody(token!!,data)
+                firebaseViewModel.sendNotification(body)
+                // 응답 여부
+                firebaseViewModel.myResponse.observe(this@ChattingActivity){
+                    Log.d(TAG, "onViewCreated: $it")
+                }
+
+                // 전송 후 에디트뷰 초기화
+                messageEditView.setText("")
             }
         }
     }

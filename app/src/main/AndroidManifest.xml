@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/main_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HappySharing" >
+        android:theme="@style/Theme.HappySharing"
+        android:usesCleartextTraffic="true">
 
         <service
             android:name=".service.MyFirebaseMessagingService"
@@ -18,6 +19,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
 
         <activity
             android:name=".QuizActivity"
@@ -62,6 +64,17 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_baseline_shopping_basket_24" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/white" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
     </application>
 
 </manifest>

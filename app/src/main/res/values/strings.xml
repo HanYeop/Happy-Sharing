@@ -13,4 +13,6 @@
         <item>기타</item>
     </string-array>
 
+    <string name="default_notification_channel_id">0</string>
+
 </resources>

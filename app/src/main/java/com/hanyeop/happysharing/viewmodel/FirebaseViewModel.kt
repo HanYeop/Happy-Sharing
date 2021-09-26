@@ -3,19 +3,22 @@ package com.hanyeop.happysharing.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
-import com.hanyeop.happysharing.model.ItemDTO
-import com.hanyeop.happysharing.model.MessageDTO
-import com.hanyeop.happysharing.model.QuizDTO
-import com.hanyeop.happysharing.model.UserDTO
+import com.hanyeop.happysharing.api.RetrofitInstance
+import com.hanyeop.happysharing.model.*
 import com.hanyeop.happysharing.repository.FirebaseRepository
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 class FirebaseViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : FirebaseRepository = FirebaseRepository()
     val userDTO = repository.userDTO
     val currentQuiz = repository.currentQuiz
+    val myResponse = repository.myResponse
 
     // 프로필 불러오기
     fun profileLoad(uid : String){
@@ -45,5 +48,12 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     // 퀴즈 불러오기
     fun quizLoad(num: Int) {
         repository.quizLoad(num)
+    }
+
+    // 푸시 메세지 전송
+    fun sendNotification(notification: NotificationBody) {
+        viewModelScope.launch {
+            repository.sendNotification(notification)
+        }
     }
 }
