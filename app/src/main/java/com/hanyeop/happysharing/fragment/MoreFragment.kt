@@ -111,6 +111,11 @@ class MoreFragment : Fragment(R.layout.fragment_more) {
 
     // 로그아웃
     private fun signOut(){
+        // 로그아웃 시 토큰 삭제
+        val user = UserDTO(curUser.uId,curUser.userId,curUser.imageUri,curUser.score,curUser.sharing,
+        curUser.area,"")
+        firebaseViewModel.profileEdit(user)
+
         auth?.signOut() // 로컬 로그아웃
         // 구글 클라이언트 로그아웃
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
