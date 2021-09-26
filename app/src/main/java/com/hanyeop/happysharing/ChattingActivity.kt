@@ -33,8 +33,8 @@ class ChattingActivity : AppCompatActivity() {
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
 
-    // 상대방 FCM 토큰
-    private var token : String? = null
+    // 상대방 유저
+    private var curUser = UserDTO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +76,9 @@ class ChattingActivity : AppCompatActivity() {
                         chatAdapter = ChatAdapter(uId.toString(),userDTO!!)
                         messageRecyclerView.adapter = chatAdapter
 
-                        userText.text = userDTO.userId
-                        token = userDTO.token // 토큰 받아오기
+                        // 동기화
+                        curUser = userDTO
+                        userText.text = curUser.userId
 
                         // 채팅 맨 밑으로 스크롤
                         chatAdapter.check.observe(this@ChattingActivity){
@@ -96,8 +97,8 @@ class ChattingActivity : AppCompatActivity() {
 
                 // FCM 전송하기
                 val data = NotificationBody.NotificationData(getString(R.string.app_name)
-                    ,"userId",messageEditView.text.toString())
-                val body = NotificationBody(token!!,data)
+                    ,curUser.userId!!,messageEditView.text.toString())
+                val body = NotificationBody(curUser.token!!,data)
                 firebaseViewModel.sendNotification(body)
                 // 응답 여부
                 firebaseViewModel.myResponse.observe(this@ChattingActivity){
