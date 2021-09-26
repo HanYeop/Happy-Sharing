@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_HappySharing)
 
         // 뷰바인딩
         binding = ActivityLoginBinding.inflate(layoutInflater)

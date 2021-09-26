@@ -15,5 +15,6 @@
     <color name="item_grey">#C8C6C6</color>
     <color name="red">#FF2442</color>
     <color name="blue">#3DB2FF</color>
+    <color name="splash_green">#57CC99</color>
 
 </resources>

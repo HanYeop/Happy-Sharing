@@ -53,7 +53,8 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +65,6 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
