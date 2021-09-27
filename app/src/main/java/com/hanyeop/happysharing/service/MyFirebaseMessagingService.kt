@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
@@ -14,6 +15,9 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hanyeop.happysharing.MainActivity
 import com.hanyeop.happysharing.R
 import java.lang.Exception
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo
+
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 메세지가 수신되면 호출
@@ -133,7 +137,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
                 "알림 메세지",
-                NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationManager.IMPORTANCE_LOW) // 소리없앰
             notificationManager.createNotificationChannel(channel)
         }
 

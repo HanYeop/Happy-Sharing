@@ -3,6 +3,7 @@ package com.hanyeop.happysharing.util
 class Constants {
 
     companion object {
+        // 로그 테스트용
         const val TAG = "tst5"
 
         // 구글 로그인 확인
@@ -20,6 +21,7 @@ class Constants {
         const val MY_ITEM = 1
         const val CATEGORY = 2
 
+        // FCM URL
         const val FCM_URL = "https://fcm.googleapis.com"
     }
 }
