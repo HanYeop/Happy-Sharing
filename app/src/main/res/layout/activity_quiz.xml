@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuizActivity">
+    tools:context=".QuizActivity"
+    android:background="@color/background_color">
 
     <TextView
         android:id="@+id/qText"
