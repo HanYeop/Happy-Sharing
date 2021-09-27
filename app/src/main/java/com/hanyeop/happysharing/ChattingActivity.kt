@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hanyeop.happysharing.adapter.ChatAdapter
@@ -33,8 +34,11 @@ class ChattingActivity : AppCompatActivity() {
     // 뷰모델 연결
     private val firebaseViewModel : FirebaseViewModel by viewModels()
 
-    // 상대방 유저
-    private var curUser = UserDTO()
+    // 현재 유저 닉네임
+    private var curUserId = ""
+
+    // 상대방 토큰
+    private var token = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,18 @@ class ChattingActivity : AppCompatActivity() {
 
         // uid 불러오기
         uId = FirebaseAuth.getInstance().currentUser?.uid
+        // 프로필 불러오기
+        firebaseViewModel.profileLoad(uId!!)
+
+        // 유저 닉네임 동기화
+        firebaseViewModel.userDTO.observe(this,{
+            Log.d(TAG, "onViewCreated: 유저 정보 동기화됨")
+            binding.apply {
+                curUserId = it.userId.toString()
+            }
+        })
+
+        // 상대방 Uid 불러오기
         val otherUId = intent.getStringExtra("otherUid").toString()
 
 
@@ -76,9 +92,8 @@ class ChattingActivity : AppCompatActivity() {
                         chatAdapter = ChatAdapter(uId.toString(),userDTO!!)
                         messageRecyclerView.adapter = chatAdapter
 
-                        // 동기화
-                        curUser = userDTO
-                        userText.text = curUser.userId
+                        userText.text = userDTO.userId
+                        token = userDTO.token.toString()
 
                         // 채팅 맨 밑으로 스크롤
                         chatAdapter.check.observe(this@ChattingActivity){
@@ -97,8 +112,8 @@ class ChattingActivity : AppCompatActivity() {
 
                 // FCM 전송하기
                 val data = NotificationBody.NotificationData(getString(R.string.app_name)
-                    ,curUser.userId!!,messageEditView.text.toString())
-                val body = NotificationBody(curUser.token!!,data)
+                    ,curUserId,messageEditView.text.toString())
+                val body = NotificationBody(token,data)
                 firebaseViewModel.sendNotification(body)
                 // 응답 여부
                 firebaseViewModel.myResponse.observe(this@ChattingActivity){
