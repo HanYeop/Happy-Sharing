@@ -14,7 +14,7 @@ class Constants {
         const val PICK_ITEM_IMAGE_FROM_ALBUM = 20
 
         // 퀴즈 갯수
-        const val QUIZ_NUMBER = 4
+        const val QUIZ_NUMBER = 5
 
         // 뷰 종류
         const val SEARCH = 0
