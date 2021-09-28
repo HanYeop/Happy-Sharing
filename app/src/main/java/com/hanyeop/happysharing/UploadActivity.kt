@@ -42,7 +42,6 @@ class UploadActivity : AppCompatActivity() {
     private val firebaseViewModel : FirebaseViewModel by viewModels()
 
 
-    // TODO 이미지 삭제?
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
