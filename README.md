@@ -13,6 +13,43 @@
 
 ## 어플리케이션 소개
 
+### 사용하지 않는 물건들을 무료로 나눌 수 있는 안드로이드 플랫폼 어플리케이션
+
+환경을 보전하는 일은 날이 갈수록 중요해지고 있습니다.
+
+ Happy Sharing (부제 : 환경을 위한 나눔) 어플리케이션은 환경 보존을 위하여 사용하지 않는 물건들을 재사용할 수 있도록 다른 사람들과 나눌 수 있는 플랫폼을 제공합니다.
 
 ## 사용한 라이브러리
+* Android Architecture Components
+  * LiveData
+  * Lifecycle
+  * ViewModel
+  * ViewBinding
+  * Navigation
 
+* UI
+  * ConstraintLayout
+  * RecyclerView
+  * Fragment
+  * Activity
+  * Service
+  * Notification
+  * BottomNavigationView
+  * Fab
+  * Spinner
+  * ProgressBar
+  * Dialog
+  * SwipeRefreshLayout
+  * CardView
+  * TextInputLayout
+
+* Third Party
+  * Kotlin Coroutine
+  * Firebase
+  * Firestore
+  * FCM (Firebase Cloud Messaging)
+  * Activity,Fragment KTX
+  * Glide
+  * Retrofit
+  * Okhttp3
+  * Gson
