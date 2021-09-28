@@ -106,6 +106,7 @@
 
 ## 퀴즈 화면
 ![image](https://user-images.githubusercontent.com/50766393/135018475-c63c3248-7429-4e05-97e5-5ae79b6a78a4.png)
+
 환경과 관련된 퀴즈들을 풀 수 있습니다. 퀴즈를 풀면 점수를 얻습니다.
 
 ## 내 글 화면
