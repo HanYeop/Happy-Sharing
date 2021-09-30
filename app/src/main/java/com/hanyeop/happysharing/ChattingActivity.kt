@@ -101,6 +101,10 @@ class ChattingActivity : AppCompatActivity() {
                         }
                     }
                 }
+            // 응답 여부
+            firebaseViewModel.myResponse.observe(this@ChattingActivity){
+                Log.d(TAG, "onViewCreated: $it")
+            }
 
             // 메시지 전송
             sendButton.setOnClickListener {
@@ -115,10 +119,6 @@ class ChattingActivity : AppCompatActivity() {
                     ,curUserId,messageEditView.text.toString())
                 val body = NotificationBody(token,data)
                 firebaseViewModel.sendNotification(body)
-                // 응답 여부
-                firebaseViewModel.myResponse.observe(this@ChattingActivity){
-                    Log.d(TAG, "onViewCreated: $it")
-                }
 
                 // 전송 후 에디트뷰 초기화
                 messageEditView.setText("")
