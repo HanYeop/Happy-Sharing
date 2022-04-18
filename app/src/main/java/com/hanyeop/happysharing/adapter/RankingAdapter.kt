@@ -1,6 +1,5 @@
 package com.hanyeop.happysharing.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,10 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemRankingBinding
-import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants.Companion.TAG
-import com.hanyeop.happysharing.util.Utility
 
 class RankingAdapter : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
 

@@ -1,23 +1,18 @@
 package com.hanyeop.happysharing
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hanyeop.happysharing.adapter.ChatAdapter
-import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.ActivityChattingBinding
-import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.NotificationBody
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
-import com.hanyeop.happysharing.util.Utility
 import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 
 class ChattingActivity : AppCompatActivity() {

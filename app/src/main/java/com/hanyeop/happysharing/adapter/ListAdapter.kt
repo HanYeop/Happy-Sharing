@@ -1,8 +1,6 @@
 package com.hanyeop.happysharing.adapter
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +13,6 @@ import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemObjectBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.util.Utility
 
 class ListAdapter(private val listener : OnItemClickListener)

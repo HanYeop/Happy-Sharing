@@ -4,24 +4,21 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.hanyeop.happysharing.databinding.ActivityUploadBinding
 import com.hanyeop.happysharing.dialog.LoadingDialog
 import com.hanyeop.happysharing.model.ItemDTO
-import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
 import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 

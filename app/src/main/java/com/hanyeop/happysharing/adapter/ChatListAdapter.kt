@@ -6,14 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemChatlistBinding
 import com.hanyeop.happysharing.model.ChatListDTO
-import com.hanyeop.happysharing.model.ItemDTO
-import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.util.Utility

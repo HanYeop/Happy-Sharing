@@ -1,15 +1,13 @@
 package com.hanyeop.happysharing
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
-import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.adapter.SearchAdapter
 import com.hanyeop.happysharing.databinding.ActivitySearchBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants
 
 class SearchActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener{
 

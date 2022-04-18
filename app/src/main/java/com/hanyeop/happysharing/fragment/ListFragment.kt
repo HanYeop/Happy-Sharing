@@ -1,35 +1,24 @@
 package com.hanyeop.happysharing.fragment
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
-import android.widget.Toolbar
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.FragmentListBinding
+import com.hanyeop.happysharing.dialog.CategoryDialog
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import android.R.menu
-import android.app.Dialog
-import android.util.Log
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
-import com.hanyeop.happysharing.dialog.CategoryDialog
-import com.hanyeop.happysharing.dialog.LoadingDialog
 import com.hanyeop.happysharing.util.Constants
-import com.hanyeop.happysharing.util.Constants.Companion.TAG
+import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 
 
 class ListFragment : Fragment(R.layout.fragment_list)

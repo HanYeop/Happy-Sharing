@@ -1,15 +1,12 @@
 package com.hanyeop.happysharing
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.navigation.navArgs
-import com.google.firebase.firestore.FirebaseFirestore
 import com.hanyeop.happysharing.databinding.ActivityQuizBinding
 import com.hanyeop.happysharing.model.QuizDTO
 import com.hanyeop.happysharing.model.UserDTO

@@ -1,22 +1,20 @@
 package com.hanyeop.happysharing.service
 
-import android.app.*
-import com.google.firebase.messaging.FirebaseMessagingService
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
 import androidx.core.graphics.drawable.IconCompat
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.hanyeop.happysharing.MainActivity
 import com.hanyeop.happysharing.R
-import java.lang.Exception
-import android.app.ActivityManager
-import android.app.ActivityManager.RunningAppProcessInfo
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {

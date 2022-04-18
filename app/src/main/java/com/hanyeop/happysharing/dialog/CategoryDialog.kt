@@ -8,12 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
-import android.widget.Toast
-import com.hanyeop.happysharing.R
-import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.DialogCategoryBinding
-import com.hanyeop.happysharing.model.ItemDTO
-import com.hanyeop.happysharing.model.UserDTO
 
 class CategoryDialog(context: Context,
                      private val listener : OnCategorySelectedListener) : Dialog(context) {

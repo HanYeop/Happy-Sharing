@@ -1,16 +1,14 @@
 package com.hanyeop.happysharing
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.adapter.SearchAdapter
 import com.hanyeop.happysharing.databinding.ActivityMyItemBinding
 import com.hanyeop.happysharing.model.ItemDTO
 import com.hanyeop.happysharing.model.UserDTO
 import com.hanyeop.happysharing.util.Constants
-import com.hanyeop.happysharing.util.Constants.Companion.TAG
 
 class MyItemActivity : AppCompatActivity(), SearchAdapter.OnItemClickListener  {
 

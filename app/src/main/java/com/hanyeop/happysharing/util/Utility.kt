@@ -1,7 +1,6 @@
 package com.hanyeop.happysharing.util
 
 import java.text.SimpleDateFormat
-import java.util.*
 
 class Utility {
 

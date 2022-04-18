@@ -1,6 +1,5 @@
 package com.hanyeop.happysharing.fragment
 
-import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,27 +8,17 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.ktx.Firebase
 import com.hanyeop.happysharing.LoginActivity
 import com.hanyeop.happysharing.ProfileActivity
 import com.hanyeop.happysharing.R
-import com.hanyeop.happysharing.databinding.FragmentListBinding
 import com.hanyeop.happysharing.databinding.FragmentMoreBinding
-import com.hanyeop.happysharing.model.NotificationBody
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.repository.FirebaseRepository
 import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.viewmodel.FirebaseViewModel
 

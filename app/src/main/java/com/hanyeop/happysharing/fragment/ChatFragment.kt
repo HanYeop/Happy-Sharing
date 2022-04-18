@@ -9,9 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.hanyeop.happysharing.ChattingActivity
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.adapter.ChatListAdapter
-import com.hanyeop.happysharing.adapter.ListAdapter
 import com.hanyeop.happysharing.databinding.FragmentChatBinding
-import com.hanyeop.happysharing.databinding.FragmentListBinding
 
 class ChatFragment : Fragment(R.layout.fragment_chat), ChatListAdapter.OnChatClickListener {
     private var uId : String? = null

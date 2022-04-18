@@ -1,11 +1,8 @@
 package com.hanyeop.happysharing.adapter
 
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,11 +12,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.databinding.ItemMychatBinding
-import com.hanyeop.happysharing.model.ItemDTO
-
 import com.hanyeop.happysharing.model.MessageDTO
 import com.hanyeop.happysharing.model.UserDTO
-import com.hanyeop.happysharing.util.Constants.Companion.TAG
 import com.hanyeop.happysharing.util.Utility
 
 class ChatAdapter(private val currentUid: String, private val otherUser: UserDTO)

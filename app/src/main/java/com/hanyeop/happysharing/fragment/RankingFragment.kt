@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.hanyeop.happysharing.R
 import com.hanyeop.happysharing.adapter.RankingAdapter
-import com.hanyeop.happysharing.databinding.FragmentMoreBinding
 import com.hanyeop.happysharing.databinding.FragmentRankingBinding
 
 class RankingFragment : Fragment(R.layout.fragment_ranking) {
